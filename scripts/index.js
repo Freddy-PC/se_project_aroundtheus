@@ -26,12 +26,18 @@ const initialCards = [
 ];
 
 const editProfileButton = document.querySelector(".profile__edit-button");
-const profileEdit = document.querySelector(".modal");
-const profileExitButton = document.querySelector(".modal__exit-button");
+const profileEditModal = document.querySelector("#edit-modal");
+const profileEditExitButton = profileEditModal.querySelector(
+  ".modal__exit-button"
+);
 const profileEditForm = document.querySelector("#edit-profile-form");
 
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
+
+const cardAddModal = document.querySelector("#add-modal");
+const cardAddButton = document.querySelector(".profile__add-button");
+const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
 
 const profileTitleInput = profileEditForm.querySelector(
   ".modal__input_type_name"
@@ -44,23 +50,33 @@ const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
-// Open Profile
-function openModal() {
-  profileEdit.classList.add("modal_opened");
+// May open profileEditModal & cardAddModal (must be specified)
+function openModal(modal) {
+  modal.classList.add("modal_opened");
 }
-// Close Profile
-function closeModal() {
-  profileEdit.classList.remove("modal_opened");
+// May close profileEditModal & cardAddModal
+function closeModal(modal) {
+  modal.classList.remove("modal_opened"); //
 }
 
 editProfileButton.addEventListener("click", function (evt) {
   profileTitleInput.value = profileTitleEl.textContent;
   profileDescriptionInput.value = profileDescriptionEl.textContent;
 
-  openModal();
+  openModal(profileEditModal);
 });
 
-profileExitButton.addEventListener("click", closeModal);
+profileEditExitButton.addEventListener("click", () => {
+  closeModal(profileEditModal);
+});
+
+cardAddButton.addEventListener("click", function (evt) {
+  openModal(cardAddModal);
+});
+
+cardAddCloseBtn.addEventListener("click", () => {
+  closeModal(cardAddModal);
+});
 
 profileEditForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -70,10 +86,11 @@ profileEditForm.addEventListener("submit", function (event) {
   profileTitleEl.textContent = titleValue;
   profileDescriptionEl.textContent = descriptionValue;
 
-  closeModal();
+  // Closes profileEditModal (after input fields have a value & save button is pressed)
+  closeModal(profileEditModal);
 });
 
-//Creates card
+// Creates card
 function createCard(data) {
   const cardEl = cardTemplate.cloneNode(true);
   const imageEl = cardEl.querySelector(".card__image");

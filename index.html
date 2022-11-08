@@ -51,7 +51,7 @@
           <p class="footer__copyright">© 2022 Freddy PC</p>
         </footer>
       </main>
-      <div class="modal">
+      <div class="modal" id="edit-modal">
         <div class="modal__container">
           <button class="modal__exit-button"></button>
           <h2 class="modal__title">Edit profile</h2>
@@ -68,6 +68,29 @@
               name="description"
               type="text"
               placeholder="Description"
+              required
+            />
+            <button class="modal__save-button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal" id="add-modal">
+        <div class="modal__container">
+          <button class="modal__exit-button"></button>
+          <h2 class="modal__title">New Place</h2>
+          <form class="modal__form" id="edit-profile-form">
+            <input
+              class="modal__input modal__input_type_name"
+              name="title"
+              type="text"
+              placeholder="Title"
+              required
+            />
+            <input
+              class="modal__input modal__input_type_descripion"
+              name="description"
+              type="text"
+              placeholder="Image URL"
               required
             />
             <button class="modal__save-button" type="submit">Save</button>
