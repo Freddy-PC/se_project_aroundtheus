@@ -132,7 +132,10 @@ function createCard(data) {
     cardLikeBtn.classList.toggle("card__like-button_active");
   });
   // Add event-listener for delete button
-
+  const cardDeleteBtn = cardEl.querySelector(".card__delete-button");
+  cardDeleteBtn.addEventListener("click", () => {
+    cardEl.remove();
+  });
   // Give finished element
   return cardEl;
 }
