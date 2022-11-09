@@ -4,9 +4,25 @@
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
+  position: relative; /*Allows .card__delete-button to have absolute position within itself*/
 }
 .card__image {
   height: 282px;
+}
+.card__delete-button {
+  background: transparent url(../images/trash-icon.svg) center no-repeat;
+  width: 18px;
+  height: 19.5px;
+  border: none;
+  opacity: 100%;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+}
+.card__delete-button:hover {
+  opacity: 60%;
+  transition: opacity 0.75s linear 0s;
 }
 .card__description {
   background-color: white;
@@ -39,11 +55,13 @@
   border: none;
   opacity: 100%;
   cursor: pointer;
+  background-size: contain;
 }
 .card__like-button:hover {
   opacity: 60%;
-  transition: opacity 1s linear 0s;
+  transition: opacity 0.75s linear 0s;
 }
 .card__like-button_active {
   background: transparent url(../images/active-heart-icon.svg) center no-repeat;
+  background-size: contain;
 }
