@@ -31,13 +31,13 @@ const profileEditExitButton = profileEditModal.querySelector(
   ".modal__exit-button"
 );
 const profileEditForm = document.querySelector("#edit-profile-form");
-
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
 
 const cardAddModal = document.querySelector("#add-modal");
 const cardAddButton = document.querySelector(".profile__add-button");
 const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
+const cardAddForm = document.querySelector("#add-card-form");
 
 const profileTitleInput = profileEditForm.querySelector(
   ".modal__input_type_name"
@@ -90,20 +90,43 @@ profileEditForm.addEventListener("submit", function (event) {
   closeModal(profileEditModal);
 });
 
-// Creates card
-function createCard(data) {
-  const cardEl = cardTemplate.cloneNode(true);
-  const imageEl = cardEl.querySelector(".card__image");
-  const cardTitle = cardEl.querySelector(".card__title");
-  imageEl.src = data.link;
-  imageEl.alt = data.name;
-  cardTitle.textContent = data.name;
-  return cardEl;
-}
+cardAddForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  // Grabs input name's value from "title" in modal
+  const name = event.target.title.value;
+  const link = event.target.link.value;
+  const cardView = createCard({
+    name,
+    link,
+  });
+  renderCard(cardView, cardListEl);
+  closeModal(cardAddModal);
+});
+
 //Renders new cards
-function renderCard(data) {
-  const cardEl = createCard(data);
-  cardListEl.append(cardEl);
+function renderCard(cardEl, container) {
+  container.prepend(cardEl);
 }
 
-initialCards.forEach(renderCard);
+// Creates card
+function createCard(data) {
+  // Clone template
+  const cardEl = cardTemplate.cloneNode(true);
+  // Find .card__image
+  const imageEl = cardEl.querySelector(".card__image");
+  // Find .card__title
+  const cardTitle = cardEl.querySelector(".card__title");
+  // Replace image src
+  imageEl.src = data.link;
+  // Replace image alt
+  imageEl.alt = data.name;
+  // Replace title
+  cardTitle.textContent = data.name;
+  //
+  return cardEl;
+}
+
+initialCards.forEach(function (cardData) {
+  const cardView = createCard(cardData);
+  renderCard(cardView, cardListEl);
+});
