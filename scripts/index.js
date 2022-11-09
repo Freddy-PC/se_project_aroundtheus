@@ -50,6 +50,10 @@ const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
+/* -------------------------------------------------------------------------- */
+/*                                  Functions                                 */
+/* -------------------------------------------------------------------------- */
+
 // May open profileEditModal & cardAddModal (must be specified)
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -122,7 +126,14 @@ function createCard(data) {
   imageEl.alt = data.name;
   // Replace title
   cardTitle.textContent = data.name;
-  //
+  // Add event-listener for like button. Why does card__like-button_active with no period work???
+  const cardLikeBtn = cardEl.querySelector(".card__like-button");
+  cardLikeBtn.addEventListener("click", () => {
+    cardLikeBtn.classList.toggle("card__like-button_active");
+  });
+  // Add event-listener for delete button
+
+  // Give finished element
   return cardEl;
 }
 
