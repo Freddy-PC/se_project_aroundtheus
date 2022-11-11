@@ -97,7 +97,22 @@
   opacity: 90%;
   transition: opacity 0.5s linear 0s;
 }
-
+.modal__image-container {
+  position: relative;
+  border-radius: 0px;
+}
+.modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+.modal__caption {
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+}
 @media screen and (max-width: 620px) {
   .modal__exit-button {
     width: 26px;
