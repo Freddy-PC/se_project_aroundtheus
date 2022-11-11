@@ -38,6 +38,11 @@ const cardAddModal = document.querySelector("#add-modal");
 const cardAddButton = document.querySelector(".profile__add-button");
 const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
 const cardAddForm = document.querySelector("#add-card-form");
+// Image selecting
+const viewCardModal = document.querySelector("#image-modal");
+const viewCardEl = viewCardModal.querySelector(".modal__image");
+const viewCardExitButton = viewCardModal.querySelector(".modal__exit-button");
+const viewCardCaption = viewCardModal.querySelector(".modal__caption");
 
 const profileTitleInput = profileEditForm.querySelector(
   ".modal__input_type_name"
@@ -82,6 +87,11 @@ cardAddCloseBtn.addEventListener("click", () => {
   closeModal(cardAddModal);
 });
 
+//Card listener
+viewCardExitButton.addEventListener("click", () => {
+  closeModal(viewCardModal);
+});
+
 profileEditForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const titleValue = event.target.title.value;
@@ -110,6 +120,8 @@ cardAddForm.addEventListener("submit", (event) => {
 //Renders new cards
 function renderCard(cardEl, container) {
   container.prepend(cardEl);
+  // need to fix so cards are in order
+  //and need new ones added in beginning
 }
 
 // Creates card
@@ -136,9 +148,18 @@ function createCard(data) {
   cardDeleteBtn.addEventListener("click", () => {
     cardEl.remove();
   });
+  // Opens Image when clicked
+  imageEl.addEventListener("click", () => {
+    viewCardEl.src = data.link;
+    viewCardEl.alt = data.name;
+    viewCardCaption.textContent = data.name;
+    openModal(viewCardModal);
+  });
   // Give finished element
   return cardEl;
 }
+console.log(viewCardModal);
+console.log(viewCardEl);
 
 initialCards.forEach(function (cardData) {
   const cardView = createCard(cardData);
