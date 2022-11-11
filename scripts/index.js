@@ -24,21 +24,22 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-
+//Edit button
 const editProfileButton = document.querySelector(".profile__edit-button");
-const profileEditModal = document.querySelector("#edit-modal");
-const profileEditExitButton = profileEditModal.querySelector(
+const editProfileModal = document.querySelector("#edit-modal");
+const profileEditExitButton = editProfileModal.querySelector(
   ".modal__exit-button"
 );
+//Input fields in Edit button
 const profileEditForm = document.querySelector("#edit-profile-form");
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
-
+//Add button
 const cardAddModal = document.querySelector("#add-modal");
 const cardAddButton = document.querySelector(".profile__add-button");
 const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
 const cardAddForm = document.querySelector("#add-card-form");
-// Image selecting
+// Image Select
 const viewCardModal = document.querySelector("#image-modal");
 const viewCardEl = viewCardModal.querySelector(".modal__image");
 const viewCardExitButton = viewCardModal.querySelector(".modal__exit-button");
@@ -59,11 +60,11 @@ const cardTemplate =
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
-// May open profileEditModal & cardAddModal (must be specified)
+// May open editProfileModal & cardAddModal (must be specified)
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
-// May close profileEditModal & cardAddModal
+// May close editProfileModal & cardAddModal
 function closeModal(modal) {
   modal.classList.remove("modal_opened"); //
 }
@@ -72,11 +73,11 @@ editProfileButton.addEventListener("click", function (evt) {
   profileTitleInput.value = profileTitleEl.textContent;
   profileDescriptionInput.value = profileDescriptionEl.textContent;
 
-  openModal(profileEditModal);
+  openModal(editProfileModal);
 });
 
 profileEditExitButton.addEventListener("click", () => {
-  closeModal(profileEditModal);
+  closeModal(editProfileModal);
 });
 
 cardAddButton.addEventListener("click", function (evt) {
@@ -96,17 +97,17 @@ profileEditForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const titleValue = event.target.title.value;
   const descriptionValue = event.target.description.value;
-
+  //Input fields will equal its past input
   profileTitleEl.textContent = titleValue;
   profileDescriptionEl.textContent = descriptionValue;
 
-  // Closes profileEditModal (after input fields have a value & save button is pressed)
-  closeModal(profileEditModal);
+  // Closes editProfileModal (after input fields have a value & save button is pressed)
+  closeModal(editProfileModal);
 });
 
 cardAddForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  // Grabs input name's value from "title" in modal
+  // Grabs input name's value from "title" and "link" in modal
   const name = event.target.title.value;
   const link = event.target.link.value;
   const cardView = createCard({
@@ -119,9 +120,7 @@ cardAddForm.addEventListener("submit", (event) => {
 
 //Renders new cards
 function renderCard(cardEl, container) {
-  container.prepend(cardEl);
-  // need to fix so cards are in order
-  //and need new ones added in beginning
+  container.prepend(cardEl); // How do i make past cards stay in order?
 }
 
 // Creates card
@@ -138,7 +137,8 @@ function createCard(data) {
   imageEl.alt = data.name;
   // Replace title
   cardTitle.textContent = data.name;
-  // Add event-listener for like button. Why does card__like-button_active with no period work???
+  // Add event-listener for like button
+  //Why does card__like-button_active with no period work???
   const cardLikeBtn = cardEl.querySelector(".card__like-button");
   cardLikeBtn.addEventListener("click", () => {
     cardLikeBtn.classList.toggle("card__like-button_active");
@@ -158,8 +158,6 @@ function createCard(data) {
   // Give finished element
   return cardEl;
 }
-console.log(viewCardModal);
-console.log(viewCardEl);
 
 initialCards.forEach(function (cardData) {
   const cardView = createCard(cardData);
