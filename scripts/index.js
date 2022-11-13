@@ -60,16 +60,16 @@ const cardTemplate =
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
-// May open editProfileModal & cardAddModal (must be specified)
+// Opens unviewable modal when applied
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
-// May close editProfileModal & cardAddModal
+// Closes Modal
 function closeModal(modal) {
-  modal.classList.remove("modal_opened"); //
+  modal.classList.remove("modal_opened");
 }
 
-editProfileButton.addEventListener("click", function (evt) {
+editProfileButton.addEventListener("click", function () {
   profileTitleInput.value = profileTitleEl.textContent;
   profileDescriptionInput.value = profileDescriptionEl.textContent;
 
@@ -116,11 +116,12 @@ cardAddForm.addEventListener("submit", (event) => {
   });
   renderCard(cardView, cardListEl);
   closeModal(cardAddModal);
+  cardAddForm.reset();
 });
 
 //Renders new cards
 function renderCard(cardEl, container) {
-  container.prepend(cardEl); // How do i make past cards stay in order?
+  container.prepend(cardEl);
 }
 
 // Creates card
@@ -158,8 +159,8 @@ function createCard(data) {
   // Give finished element
   return cardEl;
 }
-
-initialCards.forEach(function (cardData) {
+// Initialcards are in order when reversed from prepend in line 124
+initialCards.reverse().forEach(function (cardData) {
   const cardView = createCard(cardData);
   renderCard(cardView, cardListEl);
 });
