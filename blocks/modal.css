@@ -8,16 +8,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  visibility: none;
   opacity: 0;
   pointer-events: none;
-  transition: 0.25s 0.5s linear;
+  /* Gives smooth transition and 0.5s delay for visibility*/
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 .modal_opened {
-  visibility: visible;
   opacity: 1;
   pointer-events: all;
-  transition: 0.25s 0.5s linear;
+  transition: visibility 0s, opacity 0.5s linear;
 }
 .modal__container {
   position: relative;
