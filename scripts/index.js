@@ -32,6 +32,12 @@ const profileEditExitButton = editProfileModal.querySelector(
 );
 //Input fields in Edit button
 const profileEditForm = document.querySelector("#edit-profile-form");
+const profileTitleInput = profileEditForm.querySelector(
+  ".modal__input_type_name"
+);
+const profileDescriptionInput = profileEditForm.querySelector(
+  ".modal__input_type_descripion"
+);
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
 //Add button
@@ -45,16 +51,9 @@ const viewCardEl = viewCardModal.querySelector(".modal__image");
 const viewCardExitButton = viewCardModal.querySelector(".modal__exit-button");
 const viewCardCaption = viewCardModal.querySelector(".modal__caption");
 
-const profileTitleInput = profileEditForm.querySelector(
-  ".modal__input_type_name"
-);
-const profileDescriptionInput = profileEditForm.querySelector(
-  ".modal__input_type_descripion"
-);
-
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+  cardListEl.querySelector("#card-template").content.firstElementChild;
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
