@@ -36,6 +36,7 @@
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
+            <!--Reusable Card Template-->
             <template id="card-template">
               <li class="card">
                 <img src="#" alt="card-Image-Here" class="card__image" />
@@ -52,6 +53,7 @@
           <p class="footer__copyright">© 2022 Freddy PC</p>
         </footer>
       </main>
+      <!--Hidden Edit Button Window-->
       <div class="modal" id="edit-modal">
         <div class="modal__container">
           <button class="modal__exit-button"></button>
@@ -62,6 +64,8 @@
               name="title"
               type="text"
               placeholder="Name"
+              minlength="2"
+              maxlength="40"
               required
             />
             <input
@@ -69,12 +73,15 @@
               name="description"
               type="text"
               placeholder="Description"
+              minlength="2"
+              maxlength="200"
               required
             />
             <button class="modal__save-button" type="submit">Save</button>
           </form>
         </div>
       </div>
+      <!--Hidden Add Button Window-->
       <div class="modal" id="add-modal">
         <div class="modal__container">
           <button class="modal__exit-button"></button>
@@ -98,6 +105,7 @@
           </form>
         </div>
       </div>
+      <!--Hidden Image Window-->
       <div class="modal" id="image-modal">
         <div class="modal__image-container">
           <button class="modal__exit-button"></button>
@@ -107,5 +115,6 @@
       </div>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
