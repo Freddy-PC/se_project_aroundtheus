@@ -60,6 +60,9 @@
   flex-direction: column;
   align-items: flex-start;
 }
+.modal__label {
+  position: relative;
+}
 .modal__input {
   color: black;
   font-family: "Inter", sans-serif;
@@ -78,19 +81,18 @@
 .modal__input_type_error {
   border-bottom-color: rgba(255, 0, 0, 1);
 }
-.modal__error {
-  position: absolute;
-  width: 164px;
+.modal__error_visible {
+  z-index: 1;
+  width: 358px;
   height: 12px;
-  right: 231px;
-  bottom: 170px;
-
+  position: absolute;
+  right: 36px;
+  top: 59px;
   font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-
   color: #ff0000;
 }
 .modal__save-button {
