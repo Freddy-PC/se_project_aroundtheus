@@ -1,14 +1,37 @@
+/* At end of submitting project si the order of my functions optimal? 
+   What functions should go first/be at the top? */
+
+// Listen for input field validation
+
+function setEventListeners(formElement, formOptions) {
+  /* Grab input fields */
+  const inputElements = [
+    ...formElement.querySelectorAll(formOptions.inputSelector),
+  ];
+  /* Loop through input fields and 
+     listen for event = input   
+     */
+  inputElements.forEach((inputElement) => {
+    inputElement.addEventListener("input", (evt) => {
+      console.log(inputElement.validationMessage);
+    });
+  });
+}
+
 // enabling validation by calling enableValidation()
-// pass all the settings on call
 
 function enableValidation(formOptions) {
   const formElements = [...document.querySelectorAll(formOptions.formSelector)];
-  console.log(formElements);
+  /* Loop through form elements and 
+     listen for event = submit   */
   formElements.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       /* Won't refresh page after validation */
       evt.preventDefault();
     });
+    /* Call just the form elements (formElement) 
+       and config (formOptions)   */
+    setEventListeners(formElement, formOptions);
     // look for inputs inside of form
 
     /* loop through all inputs to see if all are valid */
