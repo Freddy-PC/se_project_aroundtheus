@@ -58,26 +58,36 @@
         <div class="modal__container">
           <button class="modal__exit-button"></button>
           <h2 class="modal__title">Edit profile</h2>
-          <form class="modal__form" id="edit-profile-form">
-            <input
-              class="modal__input modal__input_type_name modal__input_type_error"
-              name="title"
-              type="text"
-              placeholder="Name"
-              minlength="2"
-              maxlength="40"
-              required
-            />
-            <span class="modal__error">Test error</span>
-            <input
-              class="modal__input modal__input_type_descripion"
-              name="description"
-              type="text"
-              placeholder="Description"
-              minlength="2"
-              maxlength="200"
-              required
-            />
+          <form class="modal__form" id="edit-profile-form" novalidate>
+            <label class="modal__label">
+              <input
+                class="modal__input modal__input_type_name"
+                name="title"
+                type="text"
+                placeholder="Name"
+                id="profile-name"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="modal__error_visible" id="profile-name-error"></span>
+            </label>
+            <label class="modal__label">
+              <input
+                class="modal__input modal__input_type_descripion"
+                name="description"
+                type="text"
+                placeholder="Description"
+                id="profile-description"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span
+                class="modal__error_visible"
+                id="profile-description-error"
+              ></span>
+            </label>
             <button class="modal__save-button" type="submit">Save</button>
           </form>
         </div>
