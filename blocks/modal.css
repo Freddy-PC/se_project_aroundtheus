@@ -116,6 +116,15 @@
   opacity: 90%;
   transition: opacity 0.5s linear 0s;
 }
+.modal__button_disabled {
+  background-color: #e5e5e5;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}
+.modal__button_disabled:hover {
+  opacity: 100%;
+}
 .modal__image-container {
   position: relative;
   border-radius: 0px;
