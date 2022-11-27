@@ -38,16 +38,46 @@ function setEventListeners(formElement, formOptions) {
   const inputElements = [
     ...formElement.querySelectorAll(formOptions.inputSelector),
   ];
+  const submitButton = formElement.querySelector(".modal__save-button");
   /* Loop through input fields and listen for event = input */
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (evt) => {
       // Check for submit, input fields, and config (formOptions)
       checkInputValidity(formElement, inputElement, formOptions);
+      // Pass in input fields, save-button, and config to be used in functions
+      toggleButtonState(inputElements, submitButton, formOptions);
     });
   });
 }
 
-// enabling validation by calling enableValidation()
+// Looks through input elements and get validity
+function toggleButtonState(inputElements, submitButton, formOptions) {
+  /* If one invalid input = disable button*/
+  if (hasInvalidInput(inputElements)) {
+    disableButton(submitButton, formOptions);
+  } else {
+    enableButton(submitButton, formOptions);
+  }
+}
+
+// If all inputs (inputlist) are not valid = false
+function hasInvalidInput(inputList) {
+  return !inputList.every((inputElement) => inputElement.validity.valid);
+}
+
+// Adds disabled class to button
+function disableButton(submitButton, formOptions) {
+  submitButton.classList.add(formOptions.inactiveButtonClass);
+  // Add disabled property so browser knows its disbaled
+  return (submitButton.disabled = true);
+}
+
+function enableButton(submitButton, formOptions) {
+  submitButton.classList.remove(formOptions.inactiveButtonClass);
+  return (submitButton.disabled = false);
+}
+
+// enabling button validation
 function enableValidation(formOptions) {
   const formElements = [...document.querySelectorAll(formOptions.formSelector)];
   /* Loop through form elements and listen for event = submit */
