@@ -1,6 +1,4 @@
-/* At end of submitting project si the order of my functions optimal? 
-   What functions should go first/be at the top? */
-
+/* Use objects within enableValidation*/
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
