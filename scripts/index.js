@@ -62,10 +62,14 @@ const cardTemplate =
 // Opens unviewable modal when applied
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  // Why does this have to be here for Escape key to work?
+  document.addEventListener("keydown", handleEscape);
 }
 // Closes Modal
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  // When the Escape key is pressed closeModal
+  document.removeEventListener("keydown", handleEscape);
 }
 
 editProfileButton.addEventListener("click", function () {
@@ -90,6 +94,26 @@ cardAddCloseBtn.addEventListener("click", () => {
 //Card listener
 viewCardExitButton.addEventListener("click", () => {
   closeModal(viewCardModal);
+});
+/* --------------------------- Exit on Escape Key --------------------------- */
+const handleEscape = (evt) => {
+  evt.preventDefault();
+  escapeCloseModal(evt, closeModal);
+};
+
+function escapeCloseModal(evt, action) {
+  const modalOpened = document.querySelector(".modal_opened");
+  if (evt.key === "Escape") {
+    action(modalOpened);
+  }
+}
+/* --------------- Exit Clicking Overlay/outside Modal Window --------------- */
+/* When the outside of a modal window is clicked it closes */
+const modalWindows = Array.from(document.querySelectorAll(".modal"));
+modalWindows.forEach((modalElement) => {
+  modalElement.addEventListener("click", (evt) => {
+    closeModal(evt.target);
+  });
 });
 
 profileEditForm.addEventListener("submit", function (event) {
