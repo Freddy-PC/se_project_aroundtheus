@@ -84,6 +84,12 @@ profileEditExitButton.addEventListener("click", () => {
 });
 
 cardAddButton.addEventListener("click", function (evt) {
+  /* When clicking ".profile__add-button" 
+  the disableButton function (in validation.js)
+  is added to the save-button from the satrt*/
+  disableButton(document.querySelector("#add-modal .modal__save-button"), {
+    inactiveButtonClass: "modal__button_disabled",
+  });
   openModal(cardAddModal);
 });
 
