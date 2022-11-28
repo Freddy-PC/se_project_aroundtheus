@@ -24,13 +24,13 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-//Edit button
+/* Edit button */
 const editProfileButton = document.querySelector(".profile__edit-button");
 const editProfileModal = document.querySelector("#edit-modal");
 const profileEditExitButton = editProfileModal.querySelector(
   ".modal__exit-button"
 );
-//Input fields in Edit button
+/* Input fields in Edit button */
 const profileEditForm = document.querySelector("#edit-profile-form");
 const profileTitleInput = profileEditForm.querySelector(
   ".modal__input_type_name"
@@ -40,12 +40,12 @@ const profileDescriptionInput = profileEditForm.querySelector(
 );
 const profileTitleEl = document.querySelector(".profile__title");
 const profileDescriptionEl = document.querySelector(".profile__description");
-//Add button
+/* Add button */
 const cardAddModal = document.querySelector("#add-modal");
 const cardAddButton = document.querySelector(".profile__add-button");
 const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
 const cardAddForm = document.querySelector("#add-card-form");
-// Image Select
+/* Image Select */
 const viewCardModal = document.querySelector("#image-modal");
 const viewCardEl = viewCardModal.querySelector(".modal__image");
 const viewCardExitButton = viewCardModal.querySelector(".modal__exit-button");
@@ -59,16 +59,18 @@ const cardTemplate =
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 
-// Opens unviewable modal when applied
+/* -------------------------- Open and Close Modal -------------------------- */
+
+/* Opens unviewable modal when applied */
 function openModal(modal) {
   modal.classList.add("modal_opened");
   // Why does this have to be here for Escape key to work?
   document.addEventListener("keydown", handleEscape);
 }
-// Closes Modal
+/* Closes Modal */
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  // When the Escape key is pressed closeModal
+  /* When the Escape key is pressed closeModal */
   document.removeEventListener("keydown", handleEscape);
 }
 
@@ -86,7 +88,7 @@ profileEditExitButton.addEventListener("click", () => {
 cardAddButton.addEventListener("click", function (evt) {
   /* When clicking ".profile__add-button" 
   the disableButton function (in validation.js)
-  is added to the save-button from the satrt*/
+  is added to the save-button from the start */
   disableButton(document.querySelector("#add-modal .modal__save-button"), {
     inactiveButtonClass: "modal__button_disabled",
   });
@@ -97,11 +99,11 @@ cardAddCloseBtn.addEventListener("click", () => {
   closeModal(cardAddModal);
 });
 
-//Card listener
 viewCardExitButton.addEventListener("click", () => {
   closeModal(viewCardModal);
 });
 /* --------------------------- Exit on Escape Key --------------------------- */
+
 const handleEscape = (evt) => {
   evt.preventDefault();
   escapeCloseModal(evt, closeModal);
@@ -113,7 +115,9 @@ function escapeCloseModal(evt, action) {
     action(modalOpened);
   }
 }
+
 /* --------------- Exit Clicking Overlay/outside Modal Window --------------- */
+
 /* When the outside of a modal window is clicked it closes */
 const modalWindows = Array.from(document.querySelectorAll(".modal"));
 modalWindows.forEach((modalElement) => {
@@ -121,6 +125,8 @@ modalWindows.forEach((modalElement) => {
     closeModal(evt.target);
   });
 });
+
+/* --------------------------- Edit Profile Button -------------------------- */
 
 profileEditForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -133,6 +139,8 @@ profileEditForm.addEventListener("submit", function (event) {
   // Closes editProfileModal (after input fields have a value & save button is pressed)
   closeModal(editProfileModal);
 });
+
+/* --------------------------- Add Profile Button --------------------------- */
 
 cardAddForm.addEventListener("submit", (event) => {
   event.preventDefault();
