@@ -24,24 +24,7 @@ function enableValidation(formOptions) {
     /* Call just the form elements (formElement) 
          and config (formOptions)   */
     setEventListeners(formElement, formOptions);
-    // Done after inputting other functions!!!
-    // look for inputs inside of form
-
-    /* loop through all inputs to see if all are valid */
-
-    /* if input is not valid*/
-
-    /* get validation message*/
-
-    /* add error class to input*/
-
-    /* display error message*/
-
-    /* disable button*/
-
-    /* if all inputs are valid then enable button */
-
-    /* reset error messages*/
+    /* reset error messages?*/
   });
 }
 
@@ -118,7 +101,7 @@ function hasInvalidInput(inputList) {
 // Adds disabled class to button
 function disableButton(submitButton, formOptions) {
   submitButton.classList.add(formOptions.inactiveButtonClass);
-  // Add disabled property so browser knows its disbaled
+  // Add disabled property so browser knows its disabled
   return (submitButton.disabled = true);
 }
 
