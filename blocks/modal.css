@@ -174,4 +174,8 @@
     line-height: 17px;
     margin: 45px 22px 0 22px;
   }
+  .modal__error_visible {
+    width: 238px;
+    font-size: 11px;
+  }
 }
