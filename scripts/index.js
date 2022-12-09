@@ -1,3 +1,5 @@
+import FormValidator from "./FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -201,3 +203,25 @@ initialCards.reverse().forEach(function (cardData) {
   const cardView = createCard(cardData);
   renderCard(cardView, cardListEl);
 });
+
+/* ------------------------------- Validation ------------------------------- */
+
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+// Validate for edit button (used ID)
+const editFormValidator = new FormValidator(
+  validationSettings,
+  profileEditForm
+);
+// Validate for add button
+const addFormValidator = new FormValidator(validationSettings, cardAddForm);
+
+// Call the method
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
