@@ -1,4 +1,6 @@
 import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+import { closeModal, openModal } from "./utils.js";
 
 const initialCards = [
   {
@@ -48,10 +50,11 @@ const cardAddButton = document.querySelector(".profile__add-button");
 const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
 const cardAddForm = document.querySelector("#add-card-form");
 /* Image Select */
-const viewCardModal = document.querySelector("#image-modal");
-const viewCardEl = viewCardModal.querySelector(".modal__image");
+// To card.js
+export const viewCardModal = document.querySelector("#image-modal");
+export const viewCardEl = viewCardModal.querySelector(".modal__image");
 const viewCardExitButton = viewCardModal.querySelector(".modal__exit-button");
-const viewCardCaption = viewCardModal.querySelector(".modal__caption");
+export const viewCardCaption = viewCardModal.querySelector(".modal__caption");
 
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
@@ -62,19 +65,6 @@ const cardTemplate =
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------- Open and Close Modal -------------------------- */
-
-/* Opens unviewable modal when applied */
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  // Why does this have to be here for Escape key to work?
-  document.addEventListener("keydown", handleEscape);
-}
-/* Closes Modal */
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  /* When the Escape key is pressed closeModal */
-  document.removeEventListener("keydown", handleEscape);
-}
 
 editProfileButton.addEventListener("click", function () {
   profileTitleInput.value = profileTitleEl.textContent;
@@ -91,9 +81,10 @@ cardAddButton.addEventListener("click", function (evt) {
   /* When clicking ".profile__add-button" 
   the disableButton function (in validation.js)
   is added to the save-button from the start */
-  disableButton(document.querySelector("#add-modal .modal__save-button"), {
+  /* disableButton(document.querySelector("#add-modal .modal__save-button"), {
     inactiveButtonClass: "modal__button_disabled",
   });
+  */
   openModal(cardAddModal);
 });
 
@@ -104,19 +95,6 @@ cardAddCloseBtn.addEventListener("click", () => {
 viewCardExitButton.addEventListener("click", () => {
   closeModal(viewCardModal);
 });
-/* --------------------------- Exit on Escape Key --------------------------- */
-
-const handleEscape = (evt) => {
-  evt.preventDefault();
-  escapeCloseModal(evt, closeModal);
-};
-
-function escapeCloseModal(evt, action) {
-  const modalOpened = document.querySelector(".modal_opened");
-  if (evt.key === "Escape") {
-    action(modalOpened);
-  }
-}
 
 /* --------------- Exit Clicking Overlay/outside Modal Window --------------- */
 
@@ -155,14 +133,21 @@ cardAddForm.addEventListener("submit", (event) => {
   });
   renderCard(cardView, cardListEl);
   closeModal(cardAddModal);
+  // Adds disablebutton to card from start..
+  addFormValidator.disableButton();
   cardAddForm.reset();
 });
 
 //Renders new cards
-function renderCard(cardEl, container) {
-  container.prepend(cardEl);
+function renderCard(cardData) {
+  const card = new Card(cardData, cardTemplate);
+  cardListEl.prepend(card.getView());
 }
 
+// Initialcards are in order when reversed from prepend
+initialCards.reverse().forEach(renderCard);
+
+/* Moved to CARD.JS
 // Creates card
 function createCard(data) {
   // Clone template
@@ -198,15 +183,12 @@ function createCard(data) {
   // Give finished element
   return cardEl;
 }
-// Initialcards are in order when reversed from prepend in line 124
-initialCards.reverse().forEach(function (cardData) {
-  const cardView = createCard(cardData);
-  renderCard(cardView, cardListEl);
-});
+*/
 
 /* ------------------------------- Validation ------------------------------- */
 
-const validationSettings = {
+const settings = {
+  formSelector: ".modal__form",
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__save-button",
   inactiveButtonClass: "modal__button_disabled",
@@ -215,12 +197,9 @@ const validationSettings = {
 };
 
 // Validate for edit button (used ID)
-const editFormValidator = new FormValidator(
-  validationSettings,
-  profileEditForm
-);
+const editFormValidator = new FormValidator(settings, profileEditForm);
 // Validate for add button
-const addFormValidator = new FormValidator(validationSettings, cardAddForm);
+const addFormValidator = new FormValidator(settings, cardAddForm);
 
 // Call the method
 editFormValidator.enableValidation();
