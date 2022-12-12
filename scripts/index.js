@@ -78,14 +78,9 @@ profileEditExitButton.addEventListener("click", () => {
 });
 
 cardAddButton.addEventListener("click", function (evt) {
-  // Delete if add button submit is disabled
-  /* When clicking ".profile__add-button" 
-  the disableButton function (in validation.js)
-  is added to the save-button from the start */
-  /* disableButton(document.querySelector("#add-modal .modal__save-button"), {
-    inactiveButtonClass: "modal__button_disabled",
-  });
-  */
+  /* Adding button validation makes 
+     button disabled from start */
+  addFormValidator._toggleButtonState();
   openModal(cardAddModal);
 });
 
@@ -133,10 +128,6 @@ cardAddForm.addEventListener("submit", (event) => {
     link,
   });
   closeModal(cardAddModal);
-  // Delete if add button submit is disabled
-  /* Adds disablebutton to card from start..instead of in cardAddButton
-  addFormValidator._disableButton();
-  */
   cardAddForm.reset();
 });
 
@@ -149,44 +140,6 @@ function renderCard(cardData) {
 
 // Initialcards are in order when reversed from prepend
 initialCards.reverse().forEach(renderCard);
-
-/* Moved to CARD.JS
-// Creates card
-function createCard(data) {
-  // Clone template
-  const cardEl = cardTemplate.cloneNode(true);
-  // Find .card__image
-  const imageEl = cardEl.querySelector(".card__image");
-  // Find .card__title
-  const cardTitle = cardEl.querySelector(".card__title");
-  // Replace image src
-  imageEl.src = data.link;
-  // Replace image alt
-  imageEl.alt = data.name;
-  // Replace title
-  cardTitle.textContent = data.name;
-  // Add event-listener for like button
-  //Why does card__like-button_active with no period work???
-  const cardLikeBtn = cardEl.querySelector(".card__like-button");
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__like-button_active");
-  });
-  // Add event-listener for delete button
-  const cardDeleteBtn = cardEl.querySelector(".card__delete-button");
-  cardDeleteBtn.addEventListener("click", () => {
-    cardEl.remove();
-  });
-  // Opens Image when clicked
-  imageEl.addEventListener("click", () => {
-    viewCardEl.src = data.link;
-    viewCardEl.alt = data.name;
-    viewCardCaption.textContent = data.name;
-    openModal(viewCardModal);
-  });
-  // Give finished element
-  return cardEl;
-}
-*/
 
 /* ------------------------------- Validation ------------------------------- */
 
