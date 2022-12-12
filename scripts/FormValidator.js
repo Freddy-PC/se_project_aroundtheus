@@ -24,12 +24,11 @@ class FormValidator {
 
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", (evt) => {
-        // Check for submit, input fields, and settings (constructor)
-        /* NOT private...delete parameters later to test if still works...
-           Should work since 'this' values are called 
-           when needed.. dont need to be in parameters? */
+        // Check for submit, input fields, and (constructor)
+        /* Other parameters aren't called bc 
+           they can be referred to as 'this' */
         this.checkInputValidity(inputElement);
-        // Pass in input fields, save-button, and config to be used in functions
+        // Pass in input fields, save-button, and constructors
         this._toggleButtonState();
       });
     });
@@ -45,10 +44,11 @@ class FormValidator {
   }
 
   _showInputError(inputElement) {
-    // Does it matter that errorMessage has this??? Test later...
+    // Error message referred to as 'this'
     this._errorMessageEl = this._form.querySelector(
       `#${inputElement.id}-error`
     );
+
     inputElement.classList.add(this._inputErrorClass);
     this._errorMessageEl.textContent = inputElement.validationMessage; //differ
     this._errorMessageEl.classList.add(this._errorClass);
@@ -58,6 +58,7 @@ class FormValidator {
     this._errorMessageEl = this._form.querySelector(
       `#${inputElement.id}-error`
     );
+
     inputElement.classList.remove(this._inputErrorClass);
     this._errorMessageEl.textContent = "";
     this._errorMessageEl.classList.remove(this._errorClass);
@@ -73,8 +74,8 @@ class FormValidator {
   }
 
   _hasInvalidInput() {
-    // Don't need to have inputElement in parameter?
-    // Functions well but why??
+    /* Don't need to have inputElement in parameter
+       because already referred to in _setEventListeners? */
     return !this._inputElements.every(
       (inputElement) => inputElement.validity.valid
     );
@@ -84,7 +85,6 @@ class FormValidator {
     // submitButton is within _setEventListeners
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.disabled = true;
-    // Add so add-modal button is inactive from begininning???
   }
 
   _enableButton() {
