@@ -27,9 +27,10 @@ class FormValidator {
         // Check for submit, input fields, and (constructor)
         /* Other parameters aren't called bc 
            they can be referred to as 'this' */
+        // Both methods are public (can be used in other js files)
         this.checkInputValidity(inputElement);
         // Pass in input fields, save-button, and constructors
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
@@ -65,7 +66,7 @@ class FormValidator {
   }
 
   /* --------------------------------- Part 2 --------------------------------- */
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._disableButton();
     } else {
