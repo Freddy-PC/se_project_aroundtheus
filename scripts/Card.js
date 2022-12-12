@@ -18,12 +18,15 @@ class Card {
     this._cardElement = this._getTemplate();
     this._setEventListeners();
 
-    // Replace image src
-    this._cardElement.querySelector(".card__image").src = this._link;
-    // Replace image alt
-    this._cardElement.querySelector(".card__image").alt = this._name;
-    // Replace title
-    this._cardElement.querySelector(".card__title").textContent = this._name;
+    //Replace image alt and src
+    const imageElement = this._cardElement.querySelector(".card__image");
+    imageElement.src = this._link;
+    imageElement.alt = this._name;
+
+    // Replace title textcontent
+    const titleElement = this._cardElement.querySelector(".card__title");
+    titleElement.textContent = this._name;
+
     // Return 'this'
     return this._cardElement;
   }
