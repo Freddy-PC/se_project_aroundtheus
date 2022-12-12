@@ -35,7 +35,9 @@ function setEventListeners(formElement, formOptions) {
   const inputElements = [
     ...formElement.querySelectorAll(formOptions.inputSelector),
   ];
-  const submitButton = formElement.querySelector(".modal__save-button");
+  const submitButton = formElement.querySelector(
+    formOptions.submitButtonSelector
+  );
   /* Loop through input fields and listen for event = input */
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (evt) => {
