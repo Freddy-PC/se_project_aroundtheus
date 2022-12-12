@@ -78,6 +78,7 @@ profileEditExitButton.addEventListener("click", () => {
 });
 
 cardAddButton.addEventListener("click", function (evt) {
+  // Delete if add button submit is disabled
   /* When clicking ".profile__add-button" 
   the disableButton function (in validation.js)
   is added to the save-button from the start */
@@ -120,26 +121,28 @@ profileEditForm.addEventListener("submit", function (event) {
   closeModal(editProfileModal);
 });
 
-/* --------------------------- Add Profile Button --------------------------- */
+/* -------------------------------- Add Card -------------------------------- */
 
 cardAddForm.addEventListener("submit", (event) => {
   event.preventDefault();
   // Grabs input name's value from "title" and "link" in modal
   const name = event.target.title.value;
   const link = event.target.link.value;
-  const cardView = createCard({
+  renderCard({
     name,
     link,
   });
-  renderCard(cardView, cardListEl);
   closeModal(cardAddModal);
-  // Adds disablebutton to card from start..
-  addFormValidator.disableButton();
+  // Delete if add button submit is disabled
+  /* Adds disablebutton to card from start..instead of in cardAddButton
+  addFormValidator._disableButton();
+  */
   cardAddForm.reset();
 });
 
 //Renders new cards
 function renderCard(cardData) {
+  // Passed cardTemplate = element (not a selector)
   const card = new Card(cardData, cardTemplate);
   cardListEl.prepend(card.getView());
 }
