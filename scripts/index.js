@@ -97,7 +97,9 @@ viewCardExitButton.addEventListener("click", () => {
 /* When the outside of a modal window is clicked it closes */
 const modalWindows = Array.from(document.querySelectorAll(".modal"));
 modalWindows.forEach((modalElement) => {
-  modalElement.addEventListener("click", (evt) => {
+  /* Mousedown event ensures modal isn't closed if 
+     user clicks inside it and releases the mouse outside of it */
+  modalElement.addEventListener("mousedown", (evt) => {
     closeModal(evt.target);
   });
 });
