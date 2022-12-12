@@ -13,7 +13,7 @@ class Card {
     return this._cardSelector.cloneNode(true);
   }
 
-  // Public function
+  // Public function, initiates card elements
   getView() {
     this._cardElement = this._getTemplate();
     this._setEventListeners();
