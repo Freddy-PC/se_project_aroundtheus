@@ -37,6 +37,7 @@ class Card {
   };
 
   _toggleImage = () => {
+    // Image modal with stuff appears
     viewCardEl.src = this._link;
     viewCardEl.alt = this._name;
     viewCardCaption.textContent = this._name;
@@ -45,15 +46,17 @@ class Card {
 
   // Handlers are called after they exist
   _setEventListeners() {
+    // When like-button is clicked...
     this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
     this._cardLikeBtn.addEventListener("click", this._toggleCardLike);
-
+    // When delete-button is clicked...
     this._cardDeleteBtn = this._cardElement.querySelector(
       ".card__delete-button"
     );
     this._cardDeleteBtn.addEventListener("click", this._toggleCardDelete);
-    // From 'card-template' element
-    this._cardElement.addEventListener("click", this._toggleImage);
+    // When image is clicked...
+    this._imageEl = this._cardElement.querySelector(".card__image");
+    this._imageEl.addEventListener("click", this._toggleImage);
   }
 }
 
