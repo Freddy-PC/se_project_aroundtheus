@@ -80,7 +80,7 @@ profileEditExitButton.addEventListener("click", () => {
 cardAddButton.addEventListener("click", function (evt) {
   /* Adding button validation makes 
      button disabled from start */
-  addFormValidator._toggleButtonState();
+  addFormValidator.toggleButtonState();
   openModal(cardAddModal);
 });
 
