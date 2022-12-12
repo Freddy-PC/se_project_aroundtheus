@@ -10,10 +10,7 @@ class Card {
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
-    return document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".card")
-      .cloneNode(true);
+    return this._cardSelector.cloneNode(true);
   }
 
   // Public function
@@ -27,20 +24,8 @@ class Card {
     this._cardElement.querySelector(".card__image").alt = this._name;
     // Replace title
     this._cardElement.querySelector(".card__title").textContent = this._name;
-
-    return cardElement;
-  }
-
-  _setEventListeners() {
-    /* They don't have handlers, which would be after 'click'
-       what should I do? */
-    /* Make handlers for each later?
-     */
-    this._cardLikeBtn = this._element.querySelector(".card__like-button");
-
-    this._cardLikeBtn.addEventListener("click", toggleCardLike);
-    this._cardDeleteBtn.addEventListener("click", toggleCardDelete);
-    this._imageEl.addEventListener("click", toggleImage);
+    // Return 'this'
+    return this._cardElement;
   }
 
   _toggleCardLike = () => {
@@ -52,11 +37,24 @@ class Card {
   };
 
   _toggleImage = () => {
-    viewCardEl.src = data.link;
-    viewCardEl.alt = data.name;
-    viewCardCaption.textContent = data.name;
+    viewCardEl.src = this._link;
+    viewCardEl.alt = this._name;
+    viewCardCaption.textContent = this._name;
     openModal(viewCardModal);
   };
+
+  // Handlers are called after they exist
+  _setEventListeners() {
+    this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
+    this._cardLikeBtn.addEventListener("click", this._toggleCardLike);
+
+    this._cardDeleteBtn = this._cardElement.querySelector(
+      ".card__delete-button"
+    );
+    this._cardDeleteBtn.addEventListener("click", this._toggleCardDelete);
+    // From 'card-template' element
+    this._cardElement.addEventListener("click", this._toggleImage);
+  }
 }
 
 export default Card;
