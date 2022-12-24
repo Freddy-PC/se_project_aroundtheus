@@ -1,3 +1,6 @@
+// Delete after complete project
+// Functionality in popup.js file
+
 /* Opens unviewable modal when applied */
 export function openModal(modal) {
   modal.classList.add("modal_opened");
