@@ -1,3 +1,5 @@
+// Delete after project is complete
+
 /* Use objects within enableValidation*/
 const config = {
   formSelector: ".modal__form",
