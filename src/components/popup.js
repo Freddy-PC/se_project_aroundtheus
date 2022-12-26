@@ -10,6 +10,17 @@ class Popup {
       this.close();
     }
   }
+  open() {
+    // Method called = adding class and eventListener
+    this._popupElement.classList.add("modal_opened");
+    document.addEventListener("keydown", this._handleEscClose);
+  }
+  close() {
+    // Method called = removing class and eventListener
+    this._popupElement.classList.remove("modal_opened");
+    document.removeEventListener("keydown", this._handleEscClose);
+    /* When the Escape key is pressed closeModal */
+  }
   setEventListeners() {
     // Adds click event listener to close icon of popup (modal)
     // Close Modal window when user clicks on shaded area of form
@@ -21,17 +32,6 @@ class Popup {
         this.close();
       }
     });
-  }
-  open() {
-    // Method called = adding class and eventListener
-    this._popupElement.classList.add("modal_opened");
-    document.addEventListener("keydown", this._handleEscClose);
-  }
-  close() {
-    // Method called = removing class and eventListener
-    this._popupElement.classList.remove("modal_opened");
-    document.removeEventListener("keydown", this._handleEscClose);
-    /* When the Escape key is pressed closeModal */
   }
 }
 
