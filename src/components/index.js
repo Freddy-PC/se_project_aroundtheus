@@ -2,6 +2,8 @@ import "../pages/index.css";
 
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
+import Section from "./Section.js";
+
 import { closeModal, openModal } from "./utils.js";
 
 const initialCards = [
@@ -145,6 +147,19 @@ function renderCard(cardData) {
 // Initialcards are in order when reversed from prepend
 initialCards.reverse().forEach(renderCard);
 
+//const cardList = new Section(
+//{
+//items: initialCards,
+//renderer: (item) => {
+//const card = createCard(item);
+//const cardElement = card.getView(); // Initialize card from Card.js
+//cardList.addItem(cardElement); // Add element from Section.js
+//},
+//},
+//cardListEl
+//);
+
+//cardList.renderItems();
 /* ------------------------------- Validation ------------------------------- */
 
 const settings = {
