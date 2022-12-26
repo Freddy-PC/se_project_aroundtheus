@@ -2,8 +2,8 @@
 class Section {
   constructor({ items, renderer }, containerSelector) {
     this._renderedItems = items; // Array of data
-    this._container = document.querySelector(containerSelector); // Class selector
     this._renderer = renderer; // Function creates and renders data
+    this._container = document.querySelector(containerSelector); // Class selector
   }
   renderItems() {
     this._renderedItems.forEach(this._renderer);
