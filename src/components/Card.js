@@ -10,7 +10,12 @@ class Card {
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
-    return this._cardSelector.cloneNode(true);
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+
+    return cardElement;
   }
 
   // Public function, initiates card elements
