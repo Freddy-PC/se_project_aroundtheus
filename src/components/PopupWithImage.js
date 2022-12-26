@@ -1,5 +1,6 @@
-import Popup from ".Popup.js";
+import Popup from "./Popup.js";
 
+// Hidden Modal window
 class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
@@ -8,16 +9,13 @@ class PopupWithImage extends Popup {
   }
 
   open(data) {
-    // Add an image to the popup, img 'src' + img 'caption', and text
+    // Add an image with: img 'src', img 'caption', and text
     this._modalImage.src = data.link;
-    this._modalImage.alt = `Image ${data.name}`;
-    this._modalText.textContent = data.text;
+    this._modalImage.alt = `Image ${data.link}`;
+    this._modalText.textContent = data.name;
     // Call on method from parent (Popup)
     super.open();
   }
 }
 
 export default PopupWithImage;
-
-/* Has same functionality as _template in Card class...
-       should I delete functionlity from Card class??? */
