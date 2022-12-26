@@ -1,4 +1,4 @@
-class popup {
+class Popup {
   constructor(popupSelector) {
     // this._popupElement = modal
     this._popupElement = document.querySelector(`.${popupSelector}`);
@@ -35,4 +35,4 @@ class popup {
   }
 }
 
-export default popup;
+export default Popup;
