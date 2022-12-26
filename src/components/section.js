@@ -10,9 +10,13 @@ class Section {
     // Renders each element on a page
   }
   addItem(element) {
-    this._container.prepend(element); // Prepend or append??
+    this._container.append(element);
     // Takes a DOM element (via Selector) and adds it to the container
   }
+  // Reverse cards???
+  //prependItem(element) {
+  //  this._container.prepend(element);
+  //}
 }
 
 export default Section;
