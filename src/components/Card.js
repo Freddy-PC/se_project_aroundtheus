@@ -1,12 +1,11 @@
-import { openModal } from "./utils.js";
-import { viewCardEl, viewCardCaption, viewCardModal } from "./index.js";
-
 class Card {
-  constructor(data, cardSelector) {
+  constructor({ data, toggleImageClick }, cardSelector) {
     // Data passed in renderCard
     // In charge of only 'card'
     this._name = data.name;
     this._link = data.link;
+    this._toggleImageClick = toggleImageClick;
+
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
@@ -44,27 +43,23 @@ class Card {
     this._cardElement.remove();
   };
 
-  _toggleImage = () => {
-    // Image modal with stuff appears
-    viewCardEl.src = this._link;
-    viewCardEl.alt = this._name;
-    viewCardCaption.textContent = this._name;
-    openModal(viewCardModal);
-  };
-
   // Handlers are called after they exist
   _setEventListeners() {
     // When like-button is clicked...
     this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
-    this._cardLikeBtn.addEventListener("click", this._toggleCardLike);
+    this._cardLikeBtn.addEventListener("click", () => this._toggleCardLike());
     // When delete-button is clicked...
     this._cardDeleteBtn = this._cardElement.querySelector(
       ".card__delete-button"
     );
-    this._cardDeleteBtn.addEventListener("click", this._toggleCardDelete);
-    // When image is clicked...
+    this._cardDeleteBtn.addEventListener("click", () =>
+      this._toggleCardDelete()
+    );
+    // When image is clicked...name and link are used!
     this._imageEl = this._cardElement.querySelector(".card__image");
-    this._imageEl.addEventListener("click", this._toggleImage);
+    this._imageEl.addEventListener("click", () =>
+      this._toggleImageClick({ name: this._name, link: this._link })
+    );
   }
 }
 
