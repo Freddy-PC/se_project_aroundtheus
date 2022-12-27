@@ -6,6 +6,7 @@ import Card from "./Card.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
 import UserInfo from "./UserInfo.js";
+import PopupWithForms from "./PopupWithForms";
 
 // import { closeModal, openModal } from "./utils.js";
 
@@ -13,10 +14,11 @@ import UserInfo from "./UserInfo.js";
 /*                         Create instances of classes                        */
 /* -------------------------------------------------------------------------- */
 
-// Hidden Modal Window
+// Hidden Image Modal Window
 const viewCardModal = new PopupWithImage(selectors.viewModal);
 
-// Render Card with Section (Started code here)
+// Render Card with Section
+// (Started code here)
 const cardSection = new Section(
   {
     items: initialCards,
@@ -25,7 +27,9 @@ const cardSection = new Section(
         {
           data,
           toggleImageClick: (imgData) => {
-            viewCardModal.open(imgData);
+            // Display image when clicked
+            // Card.js
+            viewCardModal.open(imgData); // Opens image
           },
         },
         selectors.cardTemplate
@@ -36,8 +40,7 @@ const cardSection = new Section(
   selectors.cardList
 );
 
-// Manage profile data
-const editProfileModal = new UserInfo(selectors.userName, selectors.userJob);
+// Manage form data
 
 /* -------------------------------------------------------------------------- */
 /*                           Initiate all instances                           */
@@ -45,6 +48,8 @@ const editProfileModal = new UserInfo(selectors.userName, selectors.userJob);
 
 cardSection.renderItems(initialCards);
 viewCardModal.setEventListeners();
+// ...what call addCardButtonModal
+
 /* -------------------------------------------------------------------------- */
 /*                                 All of rest                                */
 /* -------------------------------------------------------------------------- */
