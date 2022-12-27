@@ -18,6 +18,10 @@
   pointer-events: all;
   transition: visibility 0s, opacity 0.5s linear;
 }
+.modal_opened:hover {
+  cursor: pointer;
+}
+
 .modal__container {
   position: relative;
   background-color: white;
@@ -126,10 +130,12 @@
   opacity: 100%;
 }
 .modal__image-container {
+  cursor: default;
   position: relative;
   border-radius: 0px;
 }
 .modal__image {
+  z-index: -1;
   max-width: 75vw;
   max-height: 75vh;
 }
