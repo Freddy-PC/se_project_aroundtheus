@@ -19,15 +19,16 @@ class Popup {
     // Method called = removing class and eventListener
     this._popupElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscClose);
+
     /* When the Escape key is pressed closeModal */
   }
   setEventListeners() {
-    // Adds click event listener to close icon of popup (modal)
-    // Close Modal window when user clicks on shaded area of form
+    /* Close Modal when you click: on shaded area of form
+     or close icon of Modal */
     this._popupElement.addEventListener("click", (evt) => {
       if (
-        evt.target.classList.contains("modal") ||
-        evt.target.classList.contains("modal__close")
+        evt.target.classList.contains("modal_opened") ||
+        evt.target.classList.contains("modal__exit-button")
       ) {
         this.close();
       }
