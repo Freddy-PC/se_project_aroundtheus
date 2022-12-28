@@ -45,31 +45,59 @@ const cardSection = new Section(
   selectors.cardList
 );
 
-// Objects value to input fields
+/* ------------------------------- Edit-Button ------------------------------ */
+// Object value equals edit input-field
 const userInfo = new UserInfo({
   userName: selectors.userName,
   userJob: selectors.userJob,
 });
 
-// Manage changing profile data, st
+// Manage initial profile data, st
 function infoProfileForm() {
   const { name, job } = userInfo.getUserInfo();
   profileTitleInput.value = name;
   profileDescriptionInput.value = job;
 }
 
-// Manage form data submit
-const editProfileForm = new PopupWithForms({
+// Change edit-modal data when submit
+const editProfileModal = new PopupWithForms({
   popupSelector: selectors.editModal,
-  handleFormSubmit: (data) => {
+  handleFormSubmit: (input) => {
     userInfo.setUserInfo({
-      profileName: data.name,
-      profileJob: data.job,
+      profileName: input.title,
+      profileJob: input.description,
+      // Changes input field "name='title'" dispalyed on main HTML
     });
+    editProfileModal.close();
   },
 });
-// How to make submit button work for edit?? ?????????????????????????????????????????????????????????
-// Paremeters from setUserInfo or _getInputValues() in PopupWithForms?????
+
+/* ------------------------------- Add-Button ------------------------------- */
+
+// Make new card...like section
+// const card = new Card(
+//   {
+//     data,
+//     toggleImageClick: (imgData) => {
+//       viewCardModal.open(imgData);
+//     },
+//   },
+//   selectors.cardTemplate
+// );
+// selectors.cardList.prepend(card.getView());
+
+// Change add-modal data when submit, st
+const addCardModal = new PopupWithForms({
+  popupSelector: selectors.addModal,
+  handleFormSubmit: (input) => {
+    const newCardData = { title: input.title, link: input.link }; // made of new inputs
+    renderCard(newCardData); // Uses inputs in process of making new card
+
+    /// Start here...what steps to take next??? WHat should card do??
+    // Look at old index.js
+    addCardModal.close();
+  },
+});
 
 /* -------------------------------------------------------------------------- */
 /*                           Initiate all instances                           */
@@ -77,7 +105,8 @@ const editProfileForm = new PopupWithForms({
 
 cardSection.renderItems(initialCards);
 viewCardModal.setEventListeners(); // Card modal
-editProfileForm.setEventListeners(); // Edit-button modal
+editProfileModal.setEventListeners(); // Edit-button modal
+addCardModal.setEventListeners(); // Add-button modal
 
 // ...what call addCardButtonModal
 
@@ -88,5 +117,9 @@ editProfileForm.setEventListeners(); // Edit-button modal
 // When you click edit-icon...
 editProfileButton.addEventListener("click", () => {
   infoProfileForm();
-  editProfileForm.open();
+  editProfileModal.open();
+});
+// Click add-icon...
+addCardButton.addEventListener("click", () => {
+  addCardModal.open();
 });

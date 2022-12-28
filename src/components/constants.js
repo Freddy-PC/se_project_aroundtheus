@@ -37,8 +37,10 @@ export const selectors = {
   userJob: ".profile__description",
   addModal: "#add-modal",
   editModal: "#edit-modal",
+  cardTemplate: "#card-template",
 };
 
+//const cardTemplate = cardListEl.querySelector("#card-template").content.firstElementChild;
 /* Input fields in Edit button */
 export const profileEditForm = document.querySelector("#edit-profile-form");
 export const profileTitleInput = profileEditForm.querySelector(
@@ -47,7 +49,7 @@ export const profileTitleInput = profileEditForm.querySelector(
 export const profileDescriptionInput = profileEditForm.querySelector(
   ".modal__input_type_descripion"
 );
-//
+// Buttons
 export const editProfileButton = document.querySelector(
   ".profile__edit-button"
 );
