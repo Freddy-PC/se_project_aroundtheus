@@ -7,14 +7,13 @@ import {
   editProfileButton,
   addCardButton,
 } from "../components/constants.js";
-import FormValidator from "../components/FormValidator.js";
+
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForms from "../components/PopupWithForms";
-
-// import { closeModal, openModal } from "./utils.js";
+import FormValidator from "../components/FormValidator.js";
 
 /* -------------------------------------------------------------------------- */
 /*                         Create instances of classes                        */
@@ -74,17 +73,24 @@ const editProfileModal = new PopupWithForms({
 
 /* ------------------------------- Add-Button ------------------------------- */
 
-// Make new card...like section
-// const card = new Card(
-//   {
-//     data,
-//     toggleImageClick: (imgData) => {
-//       viewCardModal.open(imgData);
-//     },
-//   },
-//   selectors.cardTemplate
-// );
-// selectors.cardList.prepend(card.getView());
+// Uses inputs, creates card and adds to cardSection
+function renderCard(data) {
+  const newcarData = createCard(data); // Makes Card
+  cardSection.prependItem(newcarData); // Adds card to beginning
+}
+// Creates card and image-modal
+const createCard = (objectData) => {
+  const card = new Card(
+    {
+      data: objectData,
+      toggleImageClick: (imgData) => {
+        viewCardModal.open(imgData);
+      },
+    },
+    selectors.cardTemplate
+  );
+  return card.getView();
+};
 
 // Change add-modal data when submit, st
 const addCardModal = new PopupWithForms({
@@ -92,10 +98,7 @@ const addCardModal = new PopupWithForms({
   handleFormSubmit: (input) => {
     const newCardData = { title: input.title, link: input.link }; // made of new inputs
     renderCard(newCardData); // Uses inputs in process of making new card
-
-    /// Start here...what steps to take next??? WHat should card do??
-    // Look at old index.js
-    addCardModal.close();
+    addCardModal.close(); // Allows to close
   },
 });
 
