@@ -9,14 +9,15 @@ class Section {
     this._renderedItems.forEach(this._renderer);
     // Renders each element on a page
   }
+  // Adds initial cards in order
   addItem(element) {
     this._container.append(element);
     // Takes a DOM element (via Selector) and adds it to the container
   }
-  // Reverse cards???
-  //prependItem(element) {
-  //  this._container.prepend(element);
-  //}
+  // Reverse cards
+  prependItem(element) {
+    this._container.prepend(element);
+  }
 }
 
 export default Section;
