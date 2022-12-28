@@ -30,7 +30,6 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
-      console.log(data);
       const cardElement = new Card(
         {
           data,
@@ -100,7 +99,6 @@ const createCard = (objectData) => {
 const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
-    console.log(input);
     const newCardData = { name: input.title, link: input.link }; // made of new inputs
     renderCard(newCardData); // Uses inputs in process of making new card
     addCardModal.close(); // Allows to close
