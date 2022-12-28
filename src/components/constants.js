@@ -26,9 +26,16 @@ export const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ];
-
-// export const cardListEl = document.querySelector(".cards__list");
-// const cardTemplate = cardListEl.querySelector("#card-template").content.firstElementChild;
+// FormValidation
+export const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+// Calling new classes
 export const selectors = {
   cardList: ".cards__list",
   cardTemplate: ".card__template",
@@ -40,15 +47,17 @@ export const selectors = {
   cardTemplate: "#card-template",
 };
 
-//const cardTemplate = cardListEl.querySelector("#card-template").content.firstElementChild;
 /* Input fields in Edit button */
+export const cardAddForm = document.querySelector("#add-card-form");
 export const profileEditForm = document.querySelector("#edit-profile-form");
+
 export const profileTitleInput = profileEditForm.querySelector(
   ".modal__input_type_name"
 );
 export const profileDescriptionInput = profileEditForm.querySelector(
   ".modal__input_type_descripion"
 );
+
 // Buttons
 export const editProfileButton = document.querySelector(
   ".profile__edit-button"
