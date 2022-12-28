@@ -1,5 +1,3 @@
-// Move to utils folder later //////////////
-
 export const initialCards = [
   {
     name: "Yosemite Valley",
