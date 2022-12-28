@@ -7,7 +7,8 @@ class PopupWithForms extends Popup {
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
 
-    this._inputList = this._popupElement.querySelector(".modal__input");
+    this._inputList = this._popupForm.querySelectorAll(".modal__input");
+    // inputList accesses all input fields
     /* handleFormSubmit = callback that PopupWithForm 
            calls when the forms submit event fires */
   }
@@ -25,7 +26,8 @@ class PopupWithForms extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this.__getInputValues);
+      this._handleFormSubmit(this._getInputValues());
+      // Call function in function
     });
     /*  Add the submit event handler to the form 
         and the click event listener to the close icon*/
