@@ -23,6 +23,7 @@
 }
 
 .modal__container {
+  cursor: default;
   position: relative;
   background-color: white;
   width: 430px;
