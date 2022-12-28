@@ -46,34 +46,38 @@ const cardSection = new Section(
 );
 
 // Objects value to input fields
-const userInfo = new UserInfo(selectors.userName, selectors.userJob);
+const userInfo = new UserInfo({
+  userName: selectors.userName,
+  userJob: selectors.userJob,
+});
 
-// Manage profile data, st
+// Manage changing profile data, st
 function infoProfileForm() {
   const { name, job } = userInfo.getUserInfo();
   profileTitleInput.value = name;
   profileDescriptionInput.value = job;
 }
 
-// Manage form data
+// Manage form data submit
 const editProfileForm = new PopupWithForms({
   popupSelector: selectors.editModal,
-  handleFormSubmit: (input) => {
+  handleFormSubmit: (data) => {
     userInfo.setUserInfo({
       profileName: data.name,
       profileJob: data.job,
-      // Or _getInputValues in popupwithforms?
     });
-    editProfileForm.close();
   },
 });
+// How to make submit button work for edit?? ?????????????????????????????????????????????????????????
+// Paremeters from setUserInfo or _getInputValues() in PopupWithForms?????
 
 /* -------------------------------------------------------------------------- */
 /*                           Initiate all instances                           */
 /* -------------------------------------------------------------------------- */
 
 cardSection.renderItems(initialCards);
-viewCardModal.setEventListeners();
+viewCardModal.setEventListeners(); // Card modal
+editProfileForm.setEventListeners(); // Edit-button modal
 
 // ...what call addCardButtonModal
 

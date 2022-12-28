@@ -35,8 +35,8 @@ export const selectors = {
   viewModal: "#image-modal", // "." in Popup.js
   userName: ".profile__title",
   userJob: ".profile__description",
-  addModal: "#add-Modal",
-  editModal: "#edit-Modal",
+  addModal: "#add-modal",
+  editModal: "#edit-modal",
 };
 
 /* Input fields in Edit button */

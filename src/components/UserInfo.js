@@ -7,8 +7,8 @@ class UserInfo {
   }
   getUserInfo() {
     return {
-      profileName: this._profileName.textContent,
-      profileJob: this._profileJob.textContent,
+      name: this._profileName.textContent,
+      job: this._profileJob.textContent,
     };
     // Returns an object with info about the user
     // Handy when NECESSARY to display the user data in the open form
