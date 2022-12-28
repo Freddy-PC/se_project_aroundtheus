@@ -6,6 +6,9 @@ import {
   profileDescriptionInput,
   editProfileButton,
   addCardButton,
+  settings,
+  profileEditForm,
+  cardAddForm,
 } from "../components/constants.js";
 
 import Card from "../components/Card.js";
@@ -27,6 +30,7 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
+      console.log(data);
       const cardElement = new Card(
         {
           data,
@@ -96,11 +100,19 @@ const createCard = (objectData) => {
 const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
-    const newCardData = { title: input.title, link: input.link }; // made of new inputs
+    console.log(input);
+    const newCardData = { name: input.title, link: input.link }; // made of new inputs
     renderCard(newCardData); // Uses inputs in process of making new card
     addCardModal.close(); // Allows to close
   },
 });
+
+/* ------------------------------- Validation ------------------------------- */
+
+// Validate for edit button (used ID)
+const editFormValidator = new FormValidator(settings, profileEditForm);
+// Validate for add button
+const addFormValidator = new FormValidator(settings, cardAddForm);
 
 /* -------------------------------------------------------------------------- */
 /*                           Initiate all instances                           */
@@ -111,7 +123,8 @@ viewCardModal.setEventListeners(); // Card modal
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
 
-// ...what call addCardButtonModal
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                                 All of rest                                */
@@ -124,5 +137,6 @@ editProfileButton.addEventListener("click", () => {
 });
 // Click add-icon...
 addCardButton.addEventListener("click", () => {
+  addFormValidator.toggleButtonState(); // Button inactive from start
   addCardModal.open();
 });
