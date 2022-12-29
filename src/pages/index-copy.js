@@ -48,10 +48,10 @@ const cardAddCloseBtn = cardAddModal.querySelector(".modal__exit-button");
 const cardAddForm = document.querySelector("#add-card-form");
 /* Image Select */
 // To card.js
-export const viewCardModal = document.querySelector("#image-modal");
-export const viewCardEl = viewCardModal.querySelector(".modal__image");
+const viewCardModal = document.querySelector("#image-modal");
+const viewCardEl = viewCardModal.querySelector(".modal__image");
 const viewCardExitButton = viewCardModal.querySelector(".modal__exit-button");
-export const viewCardCaption = viewCardModal.querySelector(".modal__caption");
+const viewCardCaption = viewCardModal.querySelector(".modal__caption");
 
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
@@ -159,15 +159,3 @@ const addFormValidator = new FormValidator(settings, cardAddForm);
 // Call the method
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-
-////////// NEWWWWWWWWWWWWWWWW
-const addCardButtonModal = new PopupWithForms({
-  popupSelector: selectors.addModal,
-  handleFormSubmit: (inputs) => {
-    // Function for Submit button
-    const inputElement = {
-      name: inputs["new-title"],
-      link: inputs["new-url"],
-    };
-  },
-});
