@@ -30,18 +30,8 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
-      const cardElement = new Card(
-        {
-          data,
-          toggleImageClick: (imgData) => {
-            // Display image when clicked
-            // Card.js
-            viewCardModal.open(imgData); // Opens image
-          },
-        },
-        selectors.cardTemplate
-      ); // Initialize card from Card.js
-      cardSection.addItem(cardElement.getView()); // Add element from Section.js
+      const cardElement = createCard(data); // Make card and image-modal
+      cardSection.addItem(cardElement); // Add initialCards
     },
   },
   selectors.cardList
@@ -55,7 +45,7 @@ const userInfo = new UserInfo({
 });
 
 // Manage initial profile data, st
-function infoProfileForm() {
+function fillProfileForm() {
   const { name, job } = userInfo.getUserInfo();
   profileTitleInput.value = name;
   profileDescriptionInput.value = job;
@@ -130,7 +120,7 @@ addFormValidator.enableValidation();
 
 // When you click edit-icon...
 editProfileButton.addEventListener("click", () => {
-  infoProfileForm(); // Values equal to past values
+  fillProfileForm(); // Values equal to past values
   editProfileModal.open(); // Open modal
   editFormValidator.resetValidation(); // Reset validation
 });
