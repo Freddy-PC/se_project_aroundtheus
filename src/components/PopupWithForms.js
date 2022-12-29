@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 // Selects fields in plus-icon (add-Button)
-class PopupWithForms extends Popup {
+export default class PopupWithForms extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
     this._popupForm = this._popupElement.querySelector(".modal__form");
@@ -38,5 +38,3 @@ class PopupWithForms extends Popup {
     this._popupForm.reset();
   }
 }
-
-export default PopupWithForms;

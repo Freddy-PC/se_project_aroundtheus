@@ -1,7 +1,7 @@
 import Popup from "./Popup.js";
 
 // Hidden Modal window
-class PopupWithImage extends Popup {
+export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._modalImage = this._popupElement.querySelector(".modal__image");
@@ -17,5 +17,3 @@ class PopupWithImage extends Popup {
     super.open();
   }
 }
-
-export default PopupWithImage;

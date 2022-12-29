@@ -2,7 +2,7 @@ export default class Popup {
   constructor(popupSelector) {
     // this._popupElement = modal
     this._popupElement = document.querySelector(popupSelector);
-    this._handleEscClose = this._handleEscClose.bind(this); //Why?
+    this._handleEscClose = this._handleEscClose.bind(this); // (.bind(this)) needed to not lose context 'this'
   }
   _handleEscClose(evt) {
     // Closes popup when 'Esc' key pressed
@@ -23,8 +23,9 @@ export default class Popup {
   }
   setEventListeners() {
     /* Close Modal when you click: on shaded area of form
-     or close icon of Modal */
-    this._popupElement.addEventListener("click", (evt) => {
+       or close icon of Modal */
+    // Mousedown = Onlt when you click on areas that can close
+    this._popupElement.addEventListener("mousedown", (evt) => {
       if (
         evt.target.classList.contains("modal_opened") ||
         evt.target.classList.contains("modal__exit-button")
