@@ -74,6 +74,16 @@ class FormValidator {
     }
   }
 
+  // CLears errors and controlls submit button
+  resetValidation() {
+    this.toggleButtonState();
+
+    // Checks all "modal__input" for validity
+    this._inputElements.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  }
+
   _hasInvalidInput() {
     /* Don't need to have inputElement in parameter
        because already referred to in _setEventListeners? */
