@@ -22,10 +22,9 @@ class Card {
     this._cardElement = this._getTemplate();
     this._setEventListeners();
 
-    //Replace image alt and src
-    const imageElement = this._cardElement.querySelector(".card__image");
-    imageElement.src = this._link;
-    imageElement.alt = this._name;
+    //Replace image alt and src (this from line 58)
+    this._imageEl.src = this._link;
+    this._imageEl.alt = this._name;
 
     // Replace title textcontent
     const titleElement = this._cardElement.querySelector(".card__title");
