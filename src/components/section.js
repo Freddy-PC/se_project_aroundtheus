@@ -14,7 +14,7 @@ class Section {
     this._container.append(element);
     // Takes a DOM element (via Selector) and adds it to the container
   }
-  // Reverse cards
+  // Reverse new cards
   prependItem(element) {
     this._container.prepend(element);
   }

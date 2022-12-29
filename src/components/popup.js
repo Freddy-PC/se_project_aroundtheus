@@ -19,8 +19,7 @@ class Popup {
     // Method called = removing class and eventListener
     this._popupElement.classList.remove("modal_opened");
     document.removeEventListener("keydown", this._handleEscClose);
-
-    /* When the Escape key is pressed closeModal */
+    //When the Escape key is pressed closeModal
   }
   setEventListeners() {
     /* Close Modal when you click: on shaded area of form
