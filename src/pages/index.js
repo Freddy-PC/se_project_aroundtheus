@@ -130,11 +130,12 @@ addFormValidator.enableValidation();
 
 // When you click edit-icon...
 editProfileButton.addEventListener("click", () => {
-  infoProfileForm();
-  editProfileModal.open();
+  infoProfileForm(); // Values equal to past values
+  editProfileModal.open(); // Open modal
+  editFormValidator.resetValidation(); // Reset validation
 });
 // Click add-icon...
 addCardButton.addEventListener("click", () => {
-  addFormValidator.toggleButtonState(); // Button inactive from start
   addCardModal.open();
+  addFormValidator.resetValidation();
 });
