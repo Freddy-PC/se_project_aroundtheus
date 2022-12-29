@@ -34,8 +34,8 @@ class PopupWithForms extends Popup {
   }
   close() {
     // Resets the form once the popup is closed
+    super.close();
     this._popupForm.reset();
-    super.close(); // Can this be called first? ////////////////////////////
   }
 }
 
