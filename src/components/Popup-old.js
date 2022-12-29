@@ -23,7 +23,7 @@ class Popup {
   }
   setEventListeners() {
     /* Close Modal when you click: on shaded area of form
-       or close icon of Modal */
+     or close icon of Modal */
     this._popupElement.addEventListener("click", (evt) => {
       if (
         evt.target.classList.contains("modal_opened") ||
