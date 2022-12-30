@@ -32,9 +32,9 @@ The following are some features used in the project:
 
 **Images**
 
-![Main Page](./src/images/main-page.png)
-[Edit Modal]()
-[Edit Modal with Error]()
+[Main Page](./src/images/main-page.png)
+[Edit Modal](./src/images/Edit%20Modal.png)
+[Edit Modal with Error](./src/images/Edit%20Modal%20Error.png)
 
 **Figma**
 
