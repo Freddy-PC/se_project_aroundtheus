@@ -24,11 +24,17 @@ The following are some features used in the project:
 - Flexbox
 - Grid
 - Media Queries
-- etc.
+- OOP (Object-Oriented Programming)
+- Loose Coupling
+- WebPack
+- NPM (Node Package Manager)
+- Babel
 
 **Images**
 
-None for now. :(
+![Main Page](./src/images/main-page.png)
+[Edit Modal]()
+[Edit Modal with Error]()
 
 **Figma**
 
