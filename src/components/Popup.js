@@ -1,5 +1,3 @@
-// I don't know why but the file name won't change..
-// I deleted it, named it in "Popup.js" and still reeverts to lowercase...
 export default class Popup {
   constructor(popupSelector) {
     // this._popupElement = modal
