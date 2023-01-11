@@ -17,25 +17,35 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForms from "../components/PopupWithForms";
 import FormValidator from "../components/FormValidator.js";
+import Api from "../components/Api.js";
 
 /* -------------------------------------------------------------------------- */
 /*                         Create instances of classes                        */
 /* -------------------------------------------------------------------------- */
 
+/* ----------------------------------- API ---------------------------------- */
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  authToken: "eb433773-4d2e-4e42-9076-4dd771b1e5ef",
+});
+
 // Hidden Image Modal Window
 const viewCardModal = new PopupWithImage(selectors.viewModal);
 
 // Render Card with Section, st
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const cardElement = createCard(data); // Make card and image-modal
-      cardSection.addItem(cardElement); // Add initialCards
+api.getInitialCards().then((initialCardData) => {
+  const cardSection = new Section(
+    {
+      items: initialCardData,
+      renderer: (data) => {
+        const cardElement = createCard(data); // Make card and image-modal
+        cardSection.addItem(cardElement); // Add initialCards
+      },
     },
-  },
-  selectors.cardList
-);
+    selectors.cardList
+  );
+});
 
 /* ------------------------------- Edit-Button ------------------------------ */
 // Object value equals edit input-field
@@ -106,7 +116,10 @@ const addFormValidator = new FormValidator(settings, cardAddForm);
 /*                           Initiate all instances                           */
 /* -------------------------------------------------------------------------- */
 
-cardSection.renderItems(initialCards);
+// Adds initialCards from server
+// api.getInitialCards().then((cards) => {
+//   cardSection.renderItems(cards);
+// });
 viewCardModal.setEventListeners(); // Card modal
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
