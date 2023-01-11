@@ -25,15 +25,29 @@ import Api from "../components/Api.js";
 
 /* ----------------------------------- API ---------------------------------- */
 
+// Hidden Image Modal Window
+const viewCardModal = new PopupWithImage(selectors.viewModal);
+
+// Creates card and image-modal
+const createCard = (objectData) => {
+  const card = new Card(
+    {
+      data: objectData,
+      toggleImageClick: (imgData) => {
+        viewCardModal.open(imgData);
+      },
+    },
+    selectors.cardTemplate
+  );
+  return card.getView();
+};
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
   authToken: "eb433773-4d2e-4e42-9076-4dd771b1e5ef",
 });
 
-// Hidden Image Modal Window
-const viewCardModal = new PopupWithImage(selectors.viewModal);
-
-// Render Card with Section, st
+// Initiating Render Card with Section (cards from Server), st
 api.getInitialCards().then((initialCardData) => {
   const cardSection = new Section(
     {
@@ -45,9 +59,11 @@ api.getInitialCards().then((initialCardData) => {
     },
     selectors.cardList
   );
+  cardSection.renderItems(); // Call on method to build/render cards
 });
 
 /* ------------------------------- Edit-Button ------------------------------ */
+
 // Object value equals edit input-field
 const userInfo = new UserInfo({
   userName: selectors.userName,
@@ -81,19 +97,6 @@ function renderCard(data) {
   const newcarData = createCard(data); // Makes Card
   cardSection.prependItem(newcarData); // Adds card to beginning
 }
-// Creates card and image-modal
-const createCard = (objectData) => {
-  const card = new Card(
-    {
-      data: objectData,
-      toggleImageClick: (imgData) => {
-        viewCardModal.open(imgData);
-      },
-    },
-    selectors.cardTemplate
-  );
-  return card.getView();
-};
 
 // Change add-modal data when submit, st
 const addCardModal = new PopupWithForms({
@@ -116,10 +119,6 @@ const addFormValidator = new FormValidator(settings, cardAddForm);
 /*                           Initiate all instances                           */
 /* -------------------------------------------------------------------------- */
 
-// Adds initialCards from server
-// api.getInitialCards().then((cards) => {
-//   cardSection.renderItems(cards);
-// });
 viewCardModal.setEventListeners(); // Card modal
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
