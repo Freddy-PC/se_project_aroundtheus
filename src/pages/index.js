@@ -23,7 +23,7 @@ import Api from "../components/Api.js";
 /*                         Create instances of classes                        */
 /* -------------------------------------------------------------------------- */
 
-/* ----------------------------------- API ---------------------------------- */
+/* -------------------------------- Card API -------------------------------- */
 
 // Hidden Image Modal Window
 const viewCardModal = new PopupWithImage(selectors.viewModal);
@@ -60,6 +60,16 @@ api.getInitialCards().then((initialCardData) => {
     selectors.cardList
   );
   cardSection.renderItems(); // Call on method to build/render cards
+});
+
+/* -------------------------------- User API -------------------------------- */
+
+// Set initial data for user (from server)
+api.getUserInfo().then((userData) => {
+  userInfo.setUserInfo({
+    profileName: userData.name,
+    profileJob: userData.about,
+  });
 });
 
 /* ------------------------------- Edit-Button ------------------------------ */
