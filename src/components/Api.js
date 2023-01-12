@@ -23,6 +23,7 @@ export default class Api {
       });
   }
 
+  // Initial user data
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
@@ -42,6 +43,8 @@ export default class Api {
         console.log(err);
       });
   }
+
+  // Add card to server
   addCard(input) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
@@ -61,7 +64,10 @@ export default class Api {
         console.log(err);
       });
   }
+
   // viewCardLike() {}
+
+  // Remove card from server
   removeCard() {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
