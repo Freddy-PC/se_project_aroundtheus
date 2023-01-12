@@ -68,7 +68,7 @@ export default class Api {
   // viewCardLike() {}
 
   // Remove card from server
-  removeCard() {
+  removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: {
