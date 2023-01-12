@@ -24,9 +24,15 @@ export default class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
       headers: {
         authorization: this._authToken,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        name: "Jacques Cousteau",
+        about: "Sailor, researcher",
+      }),
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
@@ -35,6 +41,24 @@ export default class Api {
         console.log(err);
       });
   }
-
-  // other methods for working with the API
+  addCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  // ...
 }
