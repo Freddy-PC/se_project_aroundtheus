@@ -104,14 +104,15 @@ const editProfileModal = new PopupWithForms({
 
 // Uses inputs, creates card and adds to cardSection
 function renderCard(data) {
-  const newcarData = createCard(data); // Makes Card
-  cardSection.prependItem(newcarData); // Adds card to beginning
+  const newCardData = createCard(data); // Makes Card
+  cardSection.prependItem(newCardData); // Adds card to beginning
 }
 
 // Change add-modal data when submit, st
 const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
+    // api.addCard(input).then((res) => console.log(res));
     const newCardData = { name: input.title, link: input.link }; // made of new inputs
     renderCard(newCardData); // Uses inputs in process of making new card
     addCardModal.close(); // Allows to close
