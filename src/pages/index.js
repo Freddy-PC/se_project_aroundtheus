@@ -28,6 +28,27 @@ import Api from "../components/Api.js";
 // Hidden Image Modal Window
 const viewCardModal = new PopupWithImage(selectors.viewModal);
 
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  authToken: "eb433773-4d2e-4e42-9076-4dd771b1e5ef",
+});
+
+let cardSection;
+// Initiating Render Card with Section (cards from Server), st
+api.getInitialCards().then((initialCardData) => {
+  cardSection = new Section(
+    {
+      items: initialCardData,
+      renderer: (data) => {
+        const cardElement = createCard(data); // Make card and image-modal
+        cardSection.addItem(cardElement); // Add initialCards
+      },
+    },
+    selectors.cardList
+  );
+  cardSection.renderItems(); // Call on method to build/render cards
+});
+
 // Creates card and image-modal
 const createCard = (objectData) => {
   const card = new Card(
@@ -41,26 +62,6 @@ const createCard = (objectData) => {
   );
   return card.getView();
 };
-
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/group-12",
-  authToken: "eb433773-4d2e-4e42-9076-4dd771b1e5ef",
-});
-
-// Initiating Render Card with Section (cards from Server), st
-api.getInitialCards().then((initialCardData) => {
-  const cardSection = new Section(
-    {
-      items: initialCardData,
-      renderer: (data) => {
-        const cardElement = createCard(data); // Make card and image-modal
-        cardSection.addItem(cardElement); // Add initialCards
-      },
-    },
-    selectors.cardList
-  );
-  cardSection.renderItems(); // Call on method to build/render cards
-});
 
 /* -------------------------------- User API -------------------------------- */
 
@@ -112,10 +113,12 @@ function renderCard(data) {
 const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
-    // api.addCard(input).then((res) => console.log(res));
-    const newCardData = { name: input.title, link: input.link }; // made of new inputs
-    renderCard(newCardData); // Uses inputs in process of making new card
-    addCardModal.close(); // Allows to close
+    api.addCard(input).then((input) => {
+      // Adds card to server
+      const newCardData = { name: input.name, link: input.link }; // made of new inputs
+      renderCard(newCardData); // Uses inputs in process of making new card
+      addCardModal.close(); // Allows to close
+    });
   },
 });
 

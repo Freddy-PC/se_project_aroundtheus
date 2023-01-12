@@ -7,6 +7,7 @@ export default class Api {
   // Refers to GET (fetch default) "https://around.nomoreparties.co/v1/group-12/cards"
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      method: "GET",
       headers: {
         authorization: this._authToken,
       },
@@ -41,7 +42,7 @@ export default class Api {
         console.log(err);
       });
   }
-  addCard({ name, link }) {
+  addCard(input) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
@@ -49,9 +50,25 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name,
-        link,
+        name: input.title, // New card name
+        link: input.link, // New card image
       }),
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  // viewCardLike() {}
+  removeCard() {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
