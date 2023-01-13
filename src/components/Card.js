@@ -1,13 +1,21 @@
 class Card {
-  constructor({ data, toggleImageClick }, cardSelector) {
+  constructor({ data, toggleImageClick, toggleImageDelete }, cardSelector) {
     // Data passed in renderCard
     // In charge of only 'card'
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id; // Refers to "_id" in cards "data"
     this._toggleImageClick = toggleImageClick;
+    this._toggleImageDelete = toggleImageDelete;
 
     this._cardSelector = cardSelector;
   }
+
+  // Return the Id of a card
+  getId() {
+    return this._id;
+  }
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -38,7 +46,8 @@ class Card {
     this._cardLikeBtn.classList.toggle("card__like-button_active");
   };
 
-  _toggleCardDelete = () => {
+  // Public...
+  toggleCardDelete = () => {
     this._cardElement.remove();
   };
 
@@ -47,12 +56,12 @@ class Card {
     // When like-button is clicked...
     this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
     this._cardLikeBtn.addEventListener("click", () => this._toggleCardLike());
-    // When delete-button is clicked...
+    // When delete-button is clicked... (delete for user and server)
     this._cardDeleteBtn = this._cardElement.querySelector(
       ".card__delete-button"
     );
     this._cardDeleteBtn.addEventListener("click", () =>
-      this._toggleCardDelete()
+      this._toggleImageDelete()
     );
     // When image is clicked...name and link are used!
     this._imageEl = this._cardElement.querySelector(".card__image");
