@@ -65,11 +65,26 @@ export default class Api {
       });
   }
 
-  // viewCardLike() {}
-
   // Remove card from server
   removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // View the likes on card
+  viewCardLike() {
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
         authorization: this._authToken,
