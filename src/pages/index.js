@@ -57,6 +57,13 @@ const createCard = (objectData) => {
       toggleImageClick: (imgData) => {
         viewCardModal.open(imgData);
       },
+      toggleImageDelete: () => {
+        const cardId = card.getId(); // Sets id of card
+        // Removes card from server
+        api.removeCard(cardId).then((res) => {
+          card.toggleCardDelete(res); // Remove card for user
+        });
+      },
     },
     selectors.cardTemplate
   );
@@ -114,8 +121,8 @@ const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
     api.addCard(input).then((input) => {
-      // Adds card to server
-      const newCardData = { name: input.name, link: input.link }; // made of new inputs
+      // Adds card to server!!
+      const newCardData = { name: input.name, link: input.link }; // new inputs
       renderCard(newCardData); // Uses inputs in process of making new card
       addCardModal.close(); // Allows to close
     });
