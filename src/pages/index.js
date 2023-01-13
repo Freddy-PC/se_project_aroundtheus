@@ -57,7 +57,7 @@ const createCard = (objectData) => {
       toggleImageClick: (imgData) => {
         viewCardModal.open(imgData);
       },
-      toggleImageDelete: () => {
+      toggleCardDelete: () => {
         const cardId = card.getId(); // Sets id of card
         // Removes card from server
         api.removeCard(cardId).then((res) => {

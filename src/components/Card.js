@@ -1,12 +1,12 @@
 class Card {
-  constructor({ data, toggleImageClick, toggleImageDelete }, cardSelector) {
+  constructor({ data, toggleImageClick, toggleCardDelete }, cardSelector) {
     // Data passed in renderCard
     // In charge of only 'card'
     this._name = data.name;
     this._link = data.link;
     this._id = data._id; // Refers to "_id" in cards "data"
     this._toggleImageClick = toggleImageClick;
-    this._toggleImageDelete = toggleImageDelete;
+    this._toggleCardDelete = toggleCardDelete;
 
     this._cardSelector = cardSelector;
   }
@@ -61,7 +61,7 @@ class Card {
       ".card__delete-button"
     );
     this._cardDeleteBtn.addEventListener("click", () =>
-      this._toggleImageDelete()
+      this._toggleCardDelete()
     );
     // When image is clicked...name and link are used!
     this._imageEl = this._cardElement.querySelector(".card__image");
