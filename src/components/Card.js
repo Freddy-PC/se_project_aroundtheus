@@ -1,12 +1,18 @@
 class Card {
-  constructor({ data, toggleImageClick, toggleCardDelete }, cardSelector) {
+  constructor(
+    { data, toggleImageClick, toggleCardDelete, toggleCardLike },
+    cardSelector
+  ) {
     // Data passed in renderCard
     // In charge of only 'card'
+    console.log(data);
     this._name = data.name;
     this._link = data.link;
     this._id = data._id; // Refers to "_id" in cards "data"
+    this._likes = data.likes; // "Likes" on array card
     this._toggleImageClick = toggleImageClick;
     this._toggleCardDelete = toggleCardDelete;
+    this._toggleCardLike = toggleCardLike;
 
     this._cardSelector = cardSelector;
   }
@@ -30,24 +36,26 @@ class Card {
     this._cardElement = this._getTemplate();
     this._setEventListeners();
 
-    //Replace image alt and src (this from line 58)
+    //Replace image alt and src (this from line 71)
     this._imageEl.src = this._link;
     this._imageEl.alt = this._name;
 
     // Replace title textcontent
     const titleElement = this._cardElement.querySelector(".card__title");
     titleElement.textContent = this._name;
+    // Set like tally
+    this._cardTally = this._cardElement.querySelector(".card__like-tally");
 
     // Return 'this'
     return this._cardElement;
   }
 
-  _toggleCardLike = () => {
+  _likeCard = () => {
     this._cardLikeBtn.classList.toggle("card__like-button_active");
   };
 
   // Public...
-  toggleCardDelete = () => {
+  deleteCard = () => {
     this._cardElement.remove();
   };
 
@@ -55,7 +63,7 @@ class Card {
   _setEventListeners() {
     // When like-button is clicked...
     this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
-    this._cardLikeBtn.addEventListener("click", () => this._toggleCardLike());
+    this._cardLikeBtn.addEventListener("click", () => this._toggleCardLike()); /////
     // When delete-button is clicked... (delete for user and server)
     this._cardDeleteBtn = this._cardElement.querySelector(
       ".card__delete-button"
