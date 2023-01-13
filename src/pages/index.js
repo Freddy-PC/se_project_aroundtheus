@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import {
-  initialCards,
+  initialCards, // Delete after submit (and constants)
   selectors,
   profileTitleInput,
   profileDescriptionInput,
@@ -61,9 +61,12 @@ const createCard = (objectData) => {
         const cardId = card.getId(); // Sets id of card
         // Removes card from server
         api.removeCard(cardId).then((res) => {
-          card.toggleCardDelete(res); // Remove card for user
+          card.deleteCard(res); // Remove card for user
         });
       },
+      // toggleCardLike: () {
+      //   // If card is liked ...
+      // }
     },
     selectors.cardTemplate
   );
