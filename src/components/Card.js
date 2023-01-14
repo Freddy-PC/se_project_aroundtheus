@@ -1,15 +1,16 @@
 class Card {
   constructor(
     { data, toggleImageClick, toggleCardDelete, toggleCardLike },
-    cardSelector
+    cardSelector,
+    userId
   ) {
     // Data passed in renderCard
-    // In charge of only 'card'
-    console.log(data);
+    // console.log(data);
     this._name = data.name;
     this._link = data.link;
-    this._id = data._id; // Refers to "_id" in cards "data"
+    this._id = data._id; // Refers to user "_id" in cards "data"
     this._likes = data.likes; // "Likes" on array card
+    this._userId = userId; // All cards have userId bc displayed
     this._toggleImageClick = toggleImageClick;
     this._toggleCardDelete = toggleCardDelete;
     this._toggleCardLike = toggleCardLike;
@@ -45,14 +46,36 @@ class Card {
     titleElement.textContent = this._name;
     // Set like tally
     this._cardTally = this._cardElement.querySelector(".card__like-tally");
+    this._likeCard(); // Shows card likes from server
 
     // Return 'this'
     return this._cardElement;
   }
 
-  _likeCard = () => {
-    this._cardLikeBtn.classList.toggle("card__like-button_active");
-  };
+  // Returns likes
+  isLiked() {
+    return this._likes.some((like) => like._id === this._userId);
+  }
+  // like._id = returns EVERY user that liked
+  // this._userId = me
+
+  // Change likes
+  updateLikes(likes) {
+    this._likes = likes;
+    this._likeCard();
+  }
+
+  // Changes like button #
+  _likeCard() {
+    if (this.isLiked()) {
+      this._cardLikeBtn.classList.add("card__like-button_active");
+      // liked by user = active
+    } else {
+      this._cardLikeBtn.classList.remove("card__like-button_active");
+      // not-liked by user = inactive
+    }
+    this._cardTally.textContent = this._likes.length;
+  }
 
   // Public...
   deleteCard = () => {
