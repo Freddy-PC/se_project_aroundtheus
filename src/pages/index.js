@@ -34,6 +34,7 @@ const api = new Api({
 });
 
 let cardSection;
+let userId;
 // Initiating Render Card with Section (cards from Server), st
 api.getInitialCards().then((initialCardData) => {
   cardSection = new Section(
@@ -64,11 +65,24 @@ const createCard = (objectData) => {
           card.deleteCard(res); // Remove card for user
         });
       },
-      // toggleCardLike: () {
-      //   // If card is liked ...
-      // }
+      toggleCardLike: () => {
+        const cardId = card.getId(); // Sets id of card
+        if (card.isLiked()) {
+          // Card liked by others =
+          api.removeCardLike(cardId).then((res) => {
+            card.updateLikes(res.likes);
+            // If clicked when liked..remove active-heart
+            // Returns arra with all likes
+          });
+        } else {
+          api.addCardLike(cardId).then((res) => {
+            card.updateLikes(res.likes);
+          });
+        }
+      },
     },
-    selectors.cardTemplate
+    selectors.cardTemplate,
+    userId // refer to user
   );
   return card.getView();
 };
@@ -81,6 +95,7 @@ api.getUserInfo().then((userData) => {
     profileName: userData.name,
     profileJob: userData.about,
   });
+  userId = userData._id; // Set the userId equal to user
 });
 
 /* ------------------------------- Edit-Button ------------------------------ */
