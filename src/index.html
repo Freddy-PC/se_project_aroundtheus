@@ -21,11 +21,14 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau-image.jpg')%>"
-            alt="Jacques-Cousteau-image"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau-image.jpg')%>"
+              alt="Jacques-Cousteau-image"
+              class="profile__image"
+            />
+            <button class="profile__image-button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button class="profile__edit-button"></button>
@@ -153,6 +156,8 @@
           <button class="modal__delete-card-button" type="submit">Yes</button>
         </div>
       </div>
+      <!--Hidden Profile Editor Window-->
+      <div></div>
     </div>
   </body>
 </html>
