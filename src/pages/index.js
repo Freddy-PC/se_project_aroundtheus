@@ -90,11 +90,13 @@ const createCard = (objectData) => {
 /* -------------------------------- User API -------------------------------- */
 
 // Set initial data for user (from server)
-api.getUserInfo().then((userData) => {
+// Userdata = array of user info
+api.loadUserInfo().then((userData) => {
   userInfo.setUserInfo({
     profileName: userData.name,
     profileJob: userData.about,
   });
+
   userId = userData._id; // Set the userId equal to user
 });
 
@@ -117,12 +119,15 @@ function fillProfileForm() {
 const editProfileModal = new PopupWithForms({
   popupSelector: selectors.editModal,
   handleFormSubmit: (input) => {
-    userInfo.setUserInfo({
-      profileName: input.title,
-      profileJob: input.description,
-      // Changes input field "name='title'" dispalyed on main HTML
+    // Edit profile field to server
+    api.editUserInfo(input).then(() => {
+      userInfo.setUserInfo({
+        profileName: input.title,
+        profileJob: input.description,
+        // Changes input field "name='title'" dispalyed on main HTML
+      });
+      editProfileModal.close();
     });
-    editProfileModal.close();
   },
 });
 
