@@ -83,7 +83,7 @@ export default class Api {
   }
 
   // Remove like
-  deleteCardLike() {
+  removeCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: {
@@ -100,7 +100,7 @@ export default class Api {
   }
 
   // Add like
-  addCardLike() {
+  addCardLike(cardId) {
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: {
