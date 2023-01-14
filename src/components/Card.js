@@ -54,7 +54,7 @@ class Card {
 
   // Returns likes
   isLiked() {
-    return this._likes.some((like) => like._id === this._userId);
+    return this._likes.some((like) => this._userId === like._id);
   }
   // === if types differ false is returned
   // like._id = returns EVERY user that liked
@@ -76,6 +76,7 @@ class Card {
       // not-liked by user = inactive
     }
     this._cardTally.textContent = this._likes.length;
+    //console.log(this._likes);
   }
 
   // Public...
@@ -95,7 +96,7 @@ class Card {
     this._cardDeleteBtn.addEventListener("click", () =>
       this._toggleCardDelete()
     );
-    // When image is clicked...name and link are used!
+    // When image is clicked...(name and link are used)
     this._imageEl = this._cardElement.querySelector(".card__image");
     this._imageEl.addEventListener("click", () =>
       this._toggleImageClick({ name: this._name, link: this._link })

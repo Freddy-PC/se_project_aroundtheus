@@ -59,6 +59,7 @@ const createCard = (objectData) => {
         viewCardModal.open(imgData);
       },
       toggleCardDelete: () => {
+        // Open modal here.....................?????????
         const cardId = card.getId(); // Sets id of card
         // Removes card from server
         api.removeCard(cardId).then((res) => {
@@ -68,6 +69,7 @@ const createCard = (objectData) => {
       toggleCardLike: () => {
         const cardId = card.getId(); // Sets id of card
         if (card.isLiked()) {
+          //console.log(card.isLiked());
           // Card liked by others =
           api.removeCardLike(cardId).then((res) => {
             card.updateLikes(res.likes);
@@ -75,6 +77,7 @@ const createCard = (objectData) => {
             // Returns arra with all likes
           });
         } else {
+          //console.log(card.isLiked());
           api.addCardLike(cardId).then((res) => {
             card.updateLikes(res.likes);
           });
@@ -144,11 +147,15 @@ const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
     api.addCard(input).then((input) => {
+      // console.log(input);
       // Adds card to server!!
-      const newCardData = { name: input.name, link: input.link }; // new inputs
+      const newCardData = { input }; // new inputs
+      console.log(input);
       renderCard(newCardData); // Uses inputs in process of making new card
+
       addCardModal.close(); // Allows to close
     });
+    // console.log(input);
   },
 });
 
