@@ -56,6 +56,7 @@ class Card {
   isLiked() {
     return this._likes.some((like) => like._id === this._userId);
   }
+  // === if types differ false is returned
   // like._id = returns EVERY user that liked
   // this._userId = me
 
