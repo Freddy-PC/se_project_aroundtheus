@@ -133,5 +133,25 @@ export default class Api {
         console.log(err);
       });
   }
+
+  updateProfilePic(avatar) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar, // changes
+      }),
+      // name and about: are named properties from server
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   // ..
 }
