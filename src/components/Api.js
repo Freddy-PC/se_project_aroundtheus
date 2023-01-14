@@ -4,6 +4,7 @@ export default class Api {
     this._authToken = authToken;
   }
 
+  // Load cards from server
   // Refers to GET (fetch default) "https://around.nomoreparties.co/v1/group-12/cards"
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
@@ -22,9 +23,25 @@ export default class Api {
         console.log(err); // log the error to the console
       });
   }
+  // Load user Info from server
+  loadUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
+      headers: {
+        authorization: this._authToken,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-  // Initial user data
-  getUserInfo() {
+  // Edits profile data on server
+  editUserInfo(input) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -32,9 +49,10 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "Jacques Cousteau",
-        about: "Sailor, researcher",
+        name: input.title,
+        about: input.description,
       }),
+      // name and about: are named properties from server
     })
       .then((res) =>
         res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
