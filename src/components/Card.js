@@ -52,7 +52,7 @@ class Card {
     return this._cardElement;
   }
 
-  // Returns likes
+  // Returns likes from arraysss
   isLiked() {
     return this._likes.some((like) => this._userId === like._id);
   }
