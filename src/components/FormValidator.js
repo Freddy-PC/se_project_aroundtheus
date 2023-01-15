@@ -46,6 +46,7 @@ class FormValidator {
 
   _showInputError(inputElement) {
     // Error message referred to as 'this'
+    // 'Id' in input must be somewhat similar to span
     this._errorMessageEl = this._form.querySelector(
       `#${inputElement.id}-error`
     );
