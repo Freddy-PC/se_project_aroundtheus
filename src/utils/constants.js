@@ -43,6 +43,7 @@ export const selectors = {
   addModal: "#add-modal",
   editModal: "#edit-modal",
   cardTemplate: "#card-template",
+  profileImageModal: "#profile-modal",
 };
 
 /* Input fields in Edit button */
@@ -55,9 +56,13 @@ export const profileTitleInput = profileEditForm.querySelector(
 export const profileDescriptionInput = profileEditForm.querySelector(
   ".modal__input_type_descripion"
 );
-
+/*Input field on profile image */
+export const changeImageForm = document.querySelector("#change-image-form");
 // Buttons
 export const editProfileButton = document.querySelector(
   ".profile__edit-button"
 );
 export const addCardButton = document.querySelector(".profile__add-button");
+export const changeProfileImageButton = document.querySelector(
+  ".profile__image-button"
+);
