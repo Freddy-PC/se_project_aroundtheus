@@ -6,9 +6,11 @@ import {
   profileDescriptionInput,
   editProfileButton,
   addCardButton,
+  changeProfileImageButton,
   settings,
   profileEditForm,
   cardAddForm,
+  changeImageForm,
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -90,7 +92,7 @@ const createCard = (objectData) => {
   return card.getView();
 };
 
-/* -------------------------------- User API -------------------------------- */
+/* ------------------------------ User Info API ----------------------------- */
 
 // Set initial data for user (from server)
 // Userdata = array of user info
@@ -101,6 +103,15 @@ api.loadUserInfo().then((userData) => {
   });
 
   userId = userData._id; // Set the userId equal to user
+});
+
+/* ----------------------------- User Image API ----------------------------- */
+
+const changeProfileImageModal = new PopupWithForms({
+  popupSelector: selectors.profileImageModal,
+  handleFormSubmit: (input) => {
+    api.updateProfilePic(input).then((res) => console.log(res));
+  },
 });
 
 /* ------------------------------- Edit-Button ------------------------------ */
@@ -146,11 +157,9 @@ function renderCard(data) {
 const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
-    api.addCard(input).then((input) => {
-      // console.log(input);
+    api.addCard(input).then((arrayInputs) => {
       // Adds card to server!!
-      const newCardData = { input }; // new inputs
-      console.log(input);
+      const newCardData = arrayInputs; // new inputs
       renderCard(newCardData); // Uses inputs in process of making new card
 
       addCardModal.close(); // Allows to close
@@ -165,17 +174,22 @@ const addCardModal = new PopupWithForms({
 const editFormValidator = new FormValidator(settings, profileEditForm);
 // Validate for add button
 const addFormValidator = new FormValidator(settings, cardAddForm);
+//Validate for edit-icon on profile image
+const changeImageValidator = new FormValidator(settings, changeImageForm);
 
 /* -------------------------------------------------------------------------- */
 /*                           Initiate all instances                           */
 /* -------------------------------------------------------------------------- */
 
 viewCardModal.setEventListeners(); // Card modal
+
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
+changeProfileImageModal.setEventListeners(); // Profile-image modal
 
-editFormValidator.enableValidation();
+editFormValidator.enableValidation(); // Validates edit fields in Edit-modal
 addFormValidator.enableValidation();
+changeImageValidator.enableValidation();
 
 /* -------------------------------------------------------------------------- */
 /*                                 All of rest                                */
@@ -191,4 +205,9 @@ editProfileButton.addEventListener("click", () => {
 addCardButton.addEventListener("click", () => {
   addCardModal.open();
   addFormValidator.resetValidation();
+});
+//Click edit-icon on profile image...
+changeProfileImageButton.addEventListener("click", () => {
+  changeProfileImageModal.open();
+  changeImageValidator.resetValidation();
 });
