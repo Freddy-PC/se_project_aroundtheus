@@ -157,7 +157,30 @@
         </div>
       </div>
       <!--Hidden Profile Editor Window-->
-      <div></div>
+      <div class="modal" id="profile-modal">
+        <div class="modal__profile-container">
+          <button class="modal__exit-button"></button>
+          <h2 class="modal__title">Change Profile Picture</h2>
+          <form class="modal__form" id="change-image-form" novalidate>
+            <!--Change ID???-->
+            <label class="modal__label">
+              <input
+                class="modal__input modal__input_type_descripion"
+                name="link"
+                type="url"
+                placeholder="Image Url Here"
+                id="new-image"
+                required
+              />
+              <span
+                class="modal__error modal__error_visible"
+                id="new-image-error"
+              ></span>
+            </label>
+            <button class="modal__save-button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
     </div>
   </body>
 </html>
