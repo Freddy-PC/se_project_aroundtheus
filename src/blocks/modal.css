@@ -31,12 +31,20 @@
   border-radius: 10px;
 }
 .modal__delete-container {
+  width: 430px;
+  height: 181px;
   cursor: default;
   position: relative;
   background-color: white;
   border-radius: 10px;
+}
+.modal__profile-container {
   width: 430px;
-  height: 181px;
+  height: 275px;
+  cursor: default;
+  position: relative;
+  background-color: white;
+  border-radius: 10px;
 }
 .modal__exit-button {
   background: transparent url(../images/close-icon.svg) center no-repeat;
