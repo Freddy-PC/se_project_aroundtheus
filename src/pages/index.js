@@ -92,37 +92,15 @@ const createCard = (objectData) => {
   return card.getView();
 };
 
-/* ------------------------------ User Info API ----------------------------- */
+/* ------------------------- Change Edit-Button API ------------------------- */
 
-// Set initial data for user (from server)
-// Userdata = array of user info
-api.loadUserInfo().then((userData) => {
-  userInfo.setUserInfo({
-    profileName: userData.name,
-    profileJob: userData.about,
-  });
-
-  userId = userData._id; // Set the userId equal to user
-});
-
-/* ----------------------------- User Image API ----------------------------- */
-
-const changeProfileImageModal = new PopupWithForms({
-  popupSelector: selectors.profileImageModal,
-  handleFormSubmit: (input) => {
-    api.updateProfilePic(input).then((res) => console.log(res));
-  },
-});
-
-/* ------------------------------- Edit-Button ------------------------------ */
-
-// Object value equals edit input-field
+// Manage profile field data in edit-button
 const userInfo = new UserInfo({
   userName: selectors.userName,
   userJob: selectors.userJob,
 });
 
-// Manage initial profile data, st
+// Object values equal input-field values from past, st
 function fillProfileForm() {
   const { name, job } = userInfo.getUserInfo();
   profileTitleInput.value = name;
@@ -145,6 +123,41 @@ const editProfileModal = new PopupWithForms({
   },
 });
 
+/* ----------------------- Saved Edit-button data API ----------------------- */
+
+// Loads input field data (from server)
+// Userdata = array of user info
+api.loadUserInfo().then((userData) => {
+  userInfo.setUserInfo({
+    profileName: userData.name,
+    profileJob: userData.about,
+  });
+  // userInfo.setProfileImage({ avatar: userData.link });
+  userId = userData._id; // Set the userId equal to user
+});
+
+/* ----------------------------- User Image API ----------------------------- */
+
+const profileImage = new UserInfo({ profileImage: selectors.profileImage });
+
+const changeProfileImageModal = new PopupWithForms({
+  popupSelector: selectors.profileImageModal,
+  handleFormSubmit: (input) => {
+    // Update profile-image via server
+    api.updateProfilePic(input).then(() => {
+      profileImage.setProfileImage({
+        avatar: input.link,
+      });
+      console.log(input.link);
+      changeProfileImageModal.close();
+    });
+  },
+});
+
+// api.loadUserInfo().then(
+// //   (userData) => console.log(userData)
+// //   // userId = userData._id; // Set the userId equal to user
+// );
 /* ------------------------------- Add-Button ------------------------------- */
 
 // Uses inputs, creates card and adds to cardSection
@@ -161,7 +174,6 @@ const addCardModal = new PopupWithForms({
       // Adds card to server!!
       const newCardData = arrayInputs; // new inputs
       renderCard(newCardData); // Uses inputs in process of making new card
-
       addCardModal.close(); // Allows to close
     });
     // console.log(input);
