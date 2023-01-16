@@ -92,9 +92,10 @@ class Card {
     // When delete-button is clicked... (delete for user and server)
     this._cardDeleteBtn = this._cardElement.querySelector(
       ".card__delete-button"
+      //"modal__delete-card-button"
     );
     this._cardDeleteBtn.addEventListener("click", () =>
-      this._toggleCardDelete()
+      this._toggleCardDelete(this._id)
     );
     // When image is clicked...(name and link are used)
     this._imageEl = this._cardElement.querySelector(".card__image");

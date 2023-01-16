@@ -63,8 +63,10 @@ const createCard = (objectData) => {
       toggleImageClick: (imgData) => {
         viewCardModal.open(imgData);
       },
-      toggleCardDelete: () => {
-        deleteCardModal.open();
+      toggleCardDelete: (dataId) => {
+        deleteCardModal.open(dataId);
+        console.log(dataId);
+        deleteCardModal.setEventListeners();
 
         // Open deleteModal here.....................?????????
         // const cardId = card.getId(); // Sets id of card
