@@ -8,9 +8,10 @@ class Card {
     // console.log(data);
     this._name = data.name;
     this._link = data.link;
-    this._id = data._id; // Refers to user "_id" in cards "data"
+    this._id = data._id; // Refers id of a card (different each time)
     this._likes = data.likes; // "Likes" on array card
-    this._userId = userId; // All cards have userId bc displayed
+    this._userId = userId; // All cards have userId bc displayed (me)
+    this._ownerId = data.owner._id; // Owner of cards
     this._toggleImageClick = toggleImageClick;
     this._toggleCardDelete = toggleCardDelete;
     this._toggleCardLike = toggleCardLike;
@@ -48,6 +49,10 @@ class Card {
     this._cardTally = this._cardElement.querySelector(".card__like-tally");
     this._likeCard(); // Shows card likes from server
 
+    // if the owner of the card isn't me...
+    if (this._ownerId !== this._userId) {
+      this._cardDeleteBtn.remove();
+    }
     // Return 'this'
     return this._cardElement;
   }
