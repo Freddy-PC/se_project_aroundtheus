@@ -45,6 +45,7 @@ export const selectors = {
   editModal: "#edit-modal",
   cardTemplate: "#card-template",
   profileImageModal: "#profile-modal",
+  deleteCardModal: "#delete-modal",
 };
 
 /* Input fields in Edit button */
