@@ -37,6 +37,7 @@ const api = new Api({
 
 let cardSection;
 let userId;
+
 // Initiating Render Card with Section (cards from Server), st
 api.getInitialCards().then((initialCardData) => {
   cardSection = new Section(
@@ -98,6 +99,7 @@ const createCard = (objectData) => {
 const userInfo = new UserInfo({
   userName: selectors.userName,
   userJob: selectors.userJob,
+  profileImage: selectors.profileImage,
 });
 
 // Object values equal input-field values from past, st
@@ -125,14 +127,15 @@ const editProfileModal = new PopupWithForms({
 
 /* ----------------------- Saved Edit-button data API ----------------------- */
 
-// Loads input field data (from server)
+// Loads updated input field data (from server)
 // Userdata = array of user info
 api.loadUserInfo().then((userData) => {
   userInfo.setUserInfo({
     profileName: userData.name,
     profileJob: userData.about,
   });
-  // userInfo.setProfileImage({ avatar: userData.link });
+  userInfo.setProfileImage(userData); // Loads Image updated from server
+
   userId = userData._id; // Set the userId equal to user
 });
 
@@ -154,10 +157,6 @@ const changeProfileImageModal = new PopupWithForms({
   },
 });
 
-// api.loadUserInfo().then(
-// //   (userData) => console.log(userData)
-// //   // userId = userData._id; // Set the userId equal to user
-// );
 /* ------------------------------- Add-Button ------------------------------- */
 
 // Uses inputs, creates card and adds to cardSection
