@@ -194,7 +194,7 @@ const changeImageValidator = new FormValidator(settings, changeImageForm);
 /* -------------------------------------------------------------------------- */
 
 viewCardModal.setEventListeners(); // Card modal
-deleteCardModal.setEventListeners();
+// deleteCardModal.setEventListeners();
 
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
