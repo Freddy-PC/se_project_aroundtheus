@@ -135,14 +135,14 @@ export default class Api {
   }
 
   updateProfilePic(avatar) {
-    return fetch(`${this._baseUrl}/users/me`, {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: {
         authorization: this._authToken,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar, // changes
+        avatar: avatar.link, // change avatar link
       }),
       // name and about: are named properties from server
     })
