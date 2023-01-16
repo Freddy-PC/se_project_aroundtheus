@@ -63,13 +63,17 @@ const createCard = (objectData) => {
       toggleImageClick: (imgData) => {
         viewCardModal.open(imgData);
       },
-      toggleCardDelete: (dataId) => {
-        deleteCardModal.open((dataId) => {
-          api.removeCard(dataId).then((res) => console.log(res));
-          deleteCardModal.close();
+      toggleCardDelete: () => {
+        const cardId = card.getId();
+        deleteCardModal.open();
+        deleteCardModal.setSubmit(() => {
+          api.removeCard(cardId).then(() => {
+            card.deleteCard(); // Remove card for user
+            deleteCardModal.close();
+          });
         });
 
-        console.log(dataId);
+        // console.log(cardId);
         // deleteCardModal.setEventListeners();
 
         // Open deleteModal here.....................?????????
@@ -81,6 +85,7 @@ const createCard = (objectData) => {
       },
       toggleCardLike: () => {
         const cardId = card.getId(); // Sets id of card
+        console.log(cardId);
         if (card.isLiked()) {
           // Card liked by others =
           api.removeCardLike(cardId).then((res) => {
