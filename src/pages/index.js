@@ -54,7 +54,6 @@ api.getInitialCards().then((initialCardData) => {
 // Hidden Image Modal Window
 const viewCardModal = new PopupWithImage(selectors.viewModal);
 const deleteCardModal = new PopupWithConfirm(selectors.deleteCardModal);
-// deleteCardModal.setEventListeners();
 
 // Creates card and image-modal
 const createCard = (objectData) => {
@@ -195,6 +194,7 @@ const changeImageValidator = new FormValidator(settings, changeImageForm);
 /* -------------------------------------------------------------------------- */
 
 viewCardModal.setEventListeners(); // Card modal
+deleteCardModal.setEventListeners();
 
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
