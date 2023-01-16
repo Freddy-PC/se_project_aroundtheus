@@ -64,9 +64,13 @@ const createCard = (objectData) => {
         viewCardModal.open(imgData);
       },
       toggleCardDelete: (dataId) => {
-        deleteCardModal.open(dataId);
+        deleteCardModal.open((dataId) => {
+          api.removeCard(dataId).then((res) => console.log(res));
+          deleteCardModal.close();
+        });
+
         console.log(dataId);
-        deleteCardModal.setEventListeners();
+        // deleteCardModal.setEventListeners();
 
         // Open deleteModal here.....................?????????
         // const cardId = card.getId(); // Sets id of card
