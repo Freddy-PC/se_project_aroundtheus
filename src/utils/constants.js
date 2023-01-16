@@ -40,6 +40,7 @@ export const selectors = {
   viewModal: "#image-modal", // "." in Popup.js
   userName: ".profile__title",
   userJob: ".profile__description",
+  profileImage: ".profile__image",
   addModal: "#add-modal",
   editModal: "#edit-modal",
   cardTemplate: "#card-template",
