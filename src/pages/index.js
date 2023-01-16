@@ -20,15 +20,13 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForms from "../components/PopupWithForms";
 import FormValidator from "../components/FormValidator.js";
 import Api from "../components/Api.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 /* -------------------------------------------------------------------------- */
 /*                         Create instances of classes                        */
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------- Card API -------------------------------- */
-
-// Hidden Image Modal Window
-const viewCardModal = new PopupWithImage(selectors.viewModal);
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -53,6 +51,11 @@ api.getInitialCards().then((initialCardData) => {
   cardSection.renderItems(); // Call on method to build/render cards
 });
 
+// Hidden Image Modal Window
+const viewCardModal = new PopupWithImage(selectors.viewModal);
+const deleteCardModal = new PopupWithConfirm(selectors.deleteCardModal);
+// deleteCardModal.setEventListeners();
+
 // Creates card and image-modal
 const createCard = (objectData) => {
   const card = new Card(
@@ -62,25 +65,25 @@ const createCard = (objectData) => {
         viewCardModal.open(imgData);
       },
       toggleCardDelete: () => {
-        // Open modal here.....................?????????
-        const cardId = card.getId(); // Sets id of card
-        // Removes card from server
-        api.removeCard(cardId).then((res) => {
-          card.deleteCard(res); // Remove card for user
-        });
+        deleteCardModal.open();
+
+        // Open deleteModal here.....................?????????
+        // const cardId = card.getId(); // Sets id of card
+        // // Removes card from server
+        // api.removeCard(cardId).then((res) => {
+        //   card.deleteCard(res); // Remove card for user
+        // });
       },
       toggleCardLike: () => {
         const cardId = card.getId(); // Sets id of card
         if (card.isLiked()) {
-          //console.log(card.isLiked());
           // Card liked by others =
           api.removeCardLike(cardId).then((res) => {
             card.updateLikes(res.likes);
             // If clicked when liked..remove active-heart
-            // Returns arra with all likes
+            // Returns array with all likes
           });
         } else {
-          //console.log(card.isLiked());
           api.addCardLike(cardId).then((res) => {
             card.updateLikes(res.likes);
           });
@@ -151,7 +154,6 @@ const changeProfileImageModal = new PopupWithForms({
       profileImage.setProfileImage({
         avatar: input.link,
       });
-      console.log(input.link);
       changeProfileImageModal.close();
     });
   },
