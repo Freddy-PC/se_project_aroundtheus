@@ -17,7 +17,7 @@ import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import PopupWithForms from "../components/PopupWithForms";
+import PopupWithForm from "../components/PopupWithForm.js";
 import FormValidator from "../components/FormValidator.js";
 import Api from "../utils/Api.js";
 import PopupWithConfirm from "../components/PopupWithConfirm.js";
@@ -114,7 +114,7 @@ function fillProfileForm() {
 }
 
 // Change edit-modal data when submit
-const editProfileModal = new PopupWithForms({
+const editProfileModal = new PopupWithForm({
   popupSelector: selectors.editModal,
   handleFormSubmit: (input) => {
     // Edit profile field to server
@@ -149,7 +149,7 @@ api.loadUserInfo().then((userData) => {
 
 const profileImage = new UserInfo({ profileImage: selectors.profileImage });
 
-const changeProfileImageModal = new PopupWithForms({
+const changeProfileImageModal = new PopupWithForm({
   popupSelector: selectors.profileImageModal,
   handleFormSubmit: (input) => {
     // Update profile-image via server
@@ -173,7 +173,7 @@ function renderCard(data) {
 }
 
 // Change add-modal data when submit, st
-const addCardModal = new PopupWithForms({
+const addCardModal = new PopupWithForm({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
     addCardModal.renderSaving(true);
