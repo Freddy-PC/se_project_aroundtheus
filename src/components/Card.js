@@ -94,10 +94,9 @@ class Card {
     // When like-button is clicked...
     this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
     this._cardLikeBtn.addEventListener("click", () => this._toggleCardLike()); /////
-    // When delete-button is clicked... (delete for user and server)
+    // When delete-button is clicked... (render deleted card for user and server)
     this._cardDeleteBtn = this._cardElement.querySelector(
       ".card__delete-button"
-      //".modal__delete-card-button"
     );
     this._cardDeleteBtn.addEventListener("click", () =>
       this._toggleCardDelete()
