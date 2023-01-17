@@ -29,16 +29,21 @@ The following are some features used in the project:
 - WebPack
 - NPM (Node Package Manager)
 - Babel
+- API (Application Programming Interface)
+- Promises
+- Event Loops
+- JSON format
+- Fetch Method (Server Requests)
+- Other Requests (GET, PATCH, POST, DELETE, and PUT)
 
 **Images**
 
-![Main Page](./src/images/main-page.png)
-![Edit Modal](./src/images/Edit%20Modal.png)
-![Edit Modal with Error](./src/images/Edit%20Modal%20Error.png)
+[Previous Main Page](./src/images/main-page.png)
 
 **Figma**
 
-[Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Previous Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- [Current Link to Figma Project](https://www.figma.com/file/xQVeb8gprjukPVKXiLXS5T/Sprint-9%3A-Applied-JavaScript?t=8h8WH6vgHf2BJlsG-6)
 
 **GitHub**
 
