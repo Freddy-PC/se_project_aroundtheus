@@ -67,9 +67,11 @@ const createCard = (objectData) => {
         const cardId = card.getId();
         deleteCardModal.open();
         deleteCardModal.setSubmit(() => {
+          deleteCardModal.renderSavingText(true); // Upload process underway!
           api.removeCard(cardId).then(() => {
             card.deleteCard(); // Remove card for user
             deleteCardModal.close();
+            deleteCardModal.renderSavingText(false); // Yes pops after complete...
           });
         });
       },
@@ -116,6 +118,7 @@ const editProfileModal = new PopupWithForms({
   popupSelector: selectors.editModal,
   handleFormSubmit: (input) => {
     // Edit profile field to server
+    editProfileModal.renderSaving(true);
     api.editUserInfo(input).then(() => {
       userInfo.setUserInfo({
         profileName: input.title,
@@ -123,6 +126,7 @@ const editProfileModal = new PopupWithForms({
         // Changes input field "name='title'" dispalyed on main HTML
       });
       editProfileModal.close();
+      editProfileModal.renderSaving(false);
     });
   },
 });
@@ -149,11 +153,13 @@ const changeProfileImageModal = new PopupWithForms({
   popupSelector: selectors.profileImageModal,
   handleFormSubmit: (input) => {
     // Update profile-image via server
+    changeProfileImageModal.renderSaving(true);
     api.updateProfilePic(input).then(() => {
       profileImage.setProfileImage({
         avatar: input.link,
       });
       changeProfileImageModal.close();
+      changeProfileImageModal.renderSaving(false);
     });
   },
 });
@@ -170,11 +176,13 @@ function renderCard(data) {
 const addCardModal = new PopupWithForms({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
+    addCardModal.renderSaving(true);
     api.addCard(input).then((arrayInputs) => {
       // Adds card to server!!
       const newCardData = arrayInputs; // new inputs
       renderCard(newCardData); // Uses inputs in process of making new card
       addCardModal.close(); // Allows to close
+      addCardModal.renderSaving(false);
     });
     // console.log(input);
   },
