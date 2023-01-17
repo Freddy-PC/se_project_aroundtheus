@@ -23,7 +23,6 @@ class UserInfo {
   setProfileImage({ avatar }) {
     this._profileImage.src = avatar; // image equal to avatar from api
     this._profileImage.alt = "Profile-image-here"; // alt equal to api textcontent
-    console.log(this._profileImage);
   }
 }
 
