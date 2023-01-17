@@ -19,7 +19,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForms from "../components/PopupWithForms";
 import FormValidator from "../components/FormValidator.js";
-import Api from "../components/Api.js";
+import Api from "../utils/Api.js";
 import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 /* -------------------------------------------------------------------------- */
