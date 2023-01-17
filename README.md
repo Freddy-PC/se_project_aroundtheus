@@ -3,16 +3,19 @@
 ## Overview
 
 - Project
+- Github
 - Tech and techniques
 - Images
 - Figma
-- Github
 - Final thoughts?
 
 **Project**
 
-On this template page users can view media from other users, add photos, edit their profile, and like posts.
-Many screen sizes are considered so the site is functional and appealing for all.
+- On this template page users can: view media from other users, edit their profile picture, edit their profile info, post photos, delete photos, and like posts. Many screen sizes are considered so the site is functional and appealing for all.
+
+**GitHub**
+
+- [Link to Project on Github](https://freddy-pc.github.io/se_project_aroundtheus/)
 
 **Tech and techniques**
 
@@ -45,13 +48,9 @@ The following are some features used in the project:
 - [Previous Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
 - [Current Link to Figma Project](https://www.figma.com/file/xQVeb8gprjukPVKXiLXS5T/Sprint-9%3A-Applied-JavaScript?t=8h8WH6vgHf2BJlsG-6)
 
-**GitHub**
-
-[Link to Github](https://freddy-pc.github.io/se_project_aroundtheus/)
-
 **Final thoughts?**
 
-Well organized project.
+- The project is organized and forms have functioning and informative UX!
 
 Recommendations/Notes:
 
