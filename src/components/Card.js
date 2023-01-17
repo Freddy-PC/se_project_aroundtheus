@@ -5,7 +5,6 @@ class Card {
     userId
   ) {
     // Data passed in renderCard
-    // console.log(data);
     this._name = data.name;
     this._link = data.link;
     this._id = data._id; // Refers id of a card (different each time)
@@ -47,7 +46,7 @@ class Card {
     titleElement.textContent = this._name;
     // Set like tally
     this._cardTally = this._cardElement.querySelector(".card__like-tally");
-    this._likeCard(); // Shows card likes from server
+    this._renderLikes(); // Shows card likes from server
 
     // if the owner of the card isn't me...
     if (this._ownerId !== this._userId) {
@@ -68,11 +67,11 @@ class Card {
   // Change likes
   updateLikes(likes) {
     this._likes = likes;
-    this._likeCard();
+    this._renderLikes();
   }
 
-  // Changes like button #
-  _likeCard() {
+  // Changes like button appearance
+  _renderLikes() {
     if (this.isLiked()) {
       this._cardLikeBtn.classList.add("card__like-button_active");
       // liked by user = active
@@ -80,16 +79,15 @@ class Card {
       this._cardLikeBtn.classList.remove("card__like-button_active");
       // not-liked by user = inactive
     }
-    this._cardTally.textContent = this._likes.length;
-    //console.log(this._likes);
+    this._cardTally.textContent = this._likes.length; // button value
   }
 
   // Public...
   deleteCard = () => {
-    this._cardElement.remove();
+    this._cardElement = null; // remove link from DOM element & improve garbage collector
   };
 
-  // Handlers are called after they exist
+  /* Handlers are called after they exist */
   _setEventListeners() {
     // When like-button is clicked...
     this._cardLikeBtn = this._cardElement.querySelector(".card__like-button");
