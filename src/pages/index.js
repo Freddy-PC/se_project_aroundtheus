@@ -25,7 +25,7 @@ import PopupWithConfirm from "../components/PopupWithConfirm.js";
 /*                         Create instances of classes                        */
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------------- Card API -------------------------------- */
+/* ---------------- Previous Edit-Button Data API + Card API ---------------- */
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -35,20 +35,40 @@ const api = new Api({
 let cardSection;
 let userId;
 
-// Initiating Render Card with Section (cards from Server), st
-api.getInitialCards().then((initialCardData) => {
-  cardSection = new Section(
-    {
-      items: initialCardData,
-      renderer: (data) => {
-        const cardElement = createCard(data); // Make card and image-modal
-        cardSection.addItem(cardElement); // Add initialCards
-      },
-    },
-    selectors.cardList
-  );
-  cardSection.renderItems(); // Call on method to build/render cards
+// Manage profile field data in edit-button
+const userInfo = new UserInfo({
+  userName: selectors.userName,
+  userJob: selectors.userJob,
+  profileImage: selectors.profileImage,
 });
+
+/* Once Promises resolved, execute: 
+   LoadUserInfo = load updated input field data from server
+   Userdata = array of user info
+   getInitialCards = get cards from server
+   initialCardData = array of card data */
+Promise.all([api.loadUserInfo(), api.getInitialCards()])
+  .then(([userData, initialCardData]) => {
+    userInfo.setProfileInfo({
+      profileName: userData.name,
+      profileJob: userData.about,
+    });
+    userInfo.setProfileImage(userData);
+    userId = userData._id; // set user id
+    // Initiating Render Card with Section (cards from Server), st
+    cardSection = new Section(
+      {
+        items: initialCardData,
+        renderer: (data) => {
+          const cardElement = createCard(data); // Make card and image-modal
+          cardSection.addItem(cardElement); // Add initialCards
+        },
+      },
+      selectors.cardList
+    );
+    cardSection.renderItems(); // Call on method to build/render cards
+  })
+  .catch((err) => console.log(err));
 
 // Hidden Image Modal Window
 const viewCardModal = new PopupWithImage(selectors.viewModal);
@@ -109,13 +129,6 @@ const createCard = (objectData) => {
 
 /* ------------------------- Change Edit-Button API ------------------------- */
 
-// Manage profile field data in edit-button
-const userInfo = new UserInfo({
-  userName: selectors.userName,
-  userJob: selectors.userJob,
-  profileImage: selectors.profileImage,
-});
-
 // Object values equal input-field values from past, st
 function fillProfileForm() {
   const { name, job } = userInfo.getUserInfo();
@@ -132,7 +145,7 @@ const editProfileModal = new PopupWithForm({
     api
       .editUserInfo(input)
       .then(() => {
-        userInfo.setUserInfo({
+        userInfo.setProfileInfo({
           profileName: input.title,
           profileJob: input.description,
           // Changes input field "name='title'" dispalyed on main HTML
@@ -145,23 +158,6 @@ const editProfileModal = new PopupWithForm({
       });
   },
 });
-
-/* ----------------------- Saved Edit-button data API ----------------------- */
-
-// Loads updated input field data (from server)
-// Userdata = array of user info
-api
-  .loadUserInfo()
-  .then((userData) => {
-    userInfo.setUserInfo({
-      profileName: userData.name,
-      profileJob: userData.about,
-    });
-    userInfo.setProfileImage(userData); // Loads Image updated from server
-
-    userId = userData._id; // Set the userId equal to user
-  })
-  .catch((err) => console.log(err));
 
 /* ----------------------------- User Image API ----------------------------- */
 
