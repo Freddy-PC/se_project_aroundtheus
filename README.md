@@ -41,7 +41,7 @@ The following are some features used in the project:
 
 **Images**
 
-[Previous Main Page](./src/images/main-page.png)
+- [Previous Main Page](./src/images/main-page.png)
 
 **Figma**
 
