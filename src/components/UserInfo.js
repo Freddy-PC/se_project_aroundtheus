@@ -15,7 +15,7 @@ class UserInfo {
     // Returns an object with info about the user
     // Handy when NECESSARY to display the user data in the open form
   }
-  setUserInfo({ profileName, profileJob }) {
+  setProfileInfo({ profileName, profileJob }) {
     // Takes new user data and adds it on the page
     this._profileName.textContent = profileName;
     this._profileJob.textContent = profileJob;
