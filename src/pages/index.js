@@ -72,20 +72,9 @@ const createCard = (objectData) => {
             deleteCardModal.close();
           });
         });
-
-        // console.log(cardId);
-        // deleteCardModal.setEventListeners();
-
-        // Open deleteModal here.....................?????????
-        // const cardId = card.getId(); // Sets id of card
-        // // Removes card from server
-        // api.removeCard(cardId).then((res) => {
-        //   card.deleteCard(res); // Remove card for user
-        // });
       },
       toggleCardLike: () => {
         const cardId = card.getId(); // Sets id of card
-        console.log(cardId);
         if (card.isLiked()) {
           // Card liked by others =
           api.removeCardLike(cardId).then((res) => {
@@ -205,7 +194,7 @@ const changeImageValidator = new FormValidator(settings, changeImageForm);
 /* -------------------------------------------------------------------------- */
 
 viewCardModal.setEventListeners(); // Card modal
-// deleteCardModal.setEventListeners();
+deleteCardModal.setEventListeners();
 
 editProfileModal.setEventListeners(); // Edit-button modal
 addCardModal.setEventListeners(); // Add-button modal
