@@ -197,6 +197,21 @@
     width: 282px;
     height: 322px;
   }
+  .modal__profile-container {
+    width: 282px;
+    height: 270px;
+  }
+  .modal__delete-container {
+    width: 282px;
+    height: 160px;
+  }
+  .modal__delete-card-button {
+    width: 238px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0 22px 0 22px;
+  }
   .modal__title {
     padding-left: 22px;
     padding-bottom: 45px;
