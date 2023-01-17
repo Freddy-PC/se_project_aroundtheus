@@ -84,6 +84,7 @@ class Card {
 
   // Public...
   deleteCard = () => {
+    this._cardElement.remove(); // remove for user
     this._cardElement = null; // remove link from DOM element & improve garbage collector
   };
 
