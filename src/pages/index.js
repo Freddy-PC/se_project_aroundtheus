@@ -1,6 +1,5 @@
 import "../pages/index.css";
 import {
-  initialCards, // Delete after submit (and constants)
   selectors,
   profileTitleInput,
   profileDescriptionInput,
@@ -68,26 +67,37 @@ const createCard = (objectData) => {
         deleteCardModal.open();
         deleteCardModal.setSubmit(() => {
           deleteCardModal.renderSavingText(true); // Upload process underway!
-          api.removeCard(cardId).then(() => {
-            card.deleteCard(); // Remove card for user
-            deleteCardModal.close();
-            deleteCardModal.renderSavingText(false); // Yes pops after complete...
-          });
+          api
+            .removeCard(cardId)
+            .then(() => {
+              card.deleteCard(); // Remove card for user
+              deleteCardModal.close();
+            })
+            .catch((err) => console.log(err)) // Locate errors
+            .finally(() => {
+              deleteCardModal.renderSavingText(false); // Reset process
+            });
         });
       },
       toggleCardLike: () => {
         const cardId = card.getId(); // Sets id of card
         if (card.isLiked()) {
-          // Card liked by others =
-          api.removeCardLike(cardId).then((res) => {
-            card.updateLikes(res.likes);
-            // If clicked when liked..remove active-heart
-            // Returns array with all likes
-          });
+          // Card liked by others:
+          api
+            .removeCardLike(cardId)
+            .then((res) => {
+              card.updateLikes(res.likes);
+              // If clicked when liked..remove active-heart
+              // Returns array with all likes
+            })
+            .catch((err) => console.log(err));
         } else {
-          api.addCardLike(cardId).then((res) => {
-            card.updateLikes(res.likes);
-          });
+          api
+            .addCardLike(cardId)
+            .then((res) => {
+              card.updateLikes(res.likes);
+            })
+            .catch((err) => console.log(err));
         }
       },
     },
@@ -119,15 +129,20 @@ const editProfileModal = new PopupWithForm({
   handleFormSubmit: (input) => {
     // Edit profile field to server
     editProfileModal.renderSaving(true);
-    api.editUserInfo(input).then(() => {
-      userInfo.setUserInfo({
-        profileName: input.title,
-        profileJob: input.description,
-        // Changes input field "name='title'" dispalyed on main HTML
+    api
+      .editUserInfo(input)
+      .then(() => {
+        userInfo.setUserInfo({
+          profileName: input.title,
+          profileJob: input.description,
+          // Changes input field "name='title'" dispalyed on main HTML
+        });
+        editProfileModal.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        editProfileModal.renderSaving(false); // Reset process
       });
-      editProfileModal.close();
-      editProfileModal.renderSaving(false);
-    });
   },
 });
 
@@ -135,15 +150,18 @@ const editProfileModal = new PopupWithForm({
 
 // Loads updated input field data (from server)
 // Userdata = array of user info
-api.loadUserInfo().then((userData) => {
-  userInfo.setUserInfo({
-    profileName: userData.name,
-    profileJob: userData.about,
-  });
-  userInfo.setProfileImage(userData); // Loads Image updated from server
+api
+  .loadUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo({
+      profileName: userData.name,
+      profileJob: userData.about,
+    });
+    userInfo.setProfileImage(userData); // Loads Image updated from server
 
-  userId = userData._id; // Set the userId equal to user
-});
+    userId = userData._id; // Set the userId equal to user
+  })
+  .catch((err) => console.log(err));
 
 /* ----------------------------- User Image API ----------------------------- */
 
@@ -154,13 +172,18 @@ const changeProfileImageModal = new PopupWithForm({
   handleFormSubmit: (input) => {
     // Update profile-image via server
     changeProfileImageModal.renderSaving(true);
-    api.updateProfilePic(input).then(() => {
-      profileImage.setProfileImage({
-        avatar: input.link,
+    api
+      .updateProfilePic(input)
+      .then(() => {
+        profileImage.setProfileImage({
+          avatar: input.link,
+        });
+        changeProfileImageModal.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        changeProfileImageModal.renderSaving(false); // Reset process
       });
-      changeProfileImageModal.close();
-      changeProfileImageModal.renderSaving(false);
-    });
   },
 });
 
@@ -177,14 +200,18 @@ const addCardModal = new PopupWithForm({
   popupSelector: selectors.addModal,
   handleFormSubmit: (input) => {
     addCardModal.renderSaving(true);
-    api.addCard(input).then((arrayInputs) => {
-      // Adds card to server!!
-      const newCardData = arrayInputs; // new inputs
-      renderCard(newCardData); // Uses inputs in process of making new card
-      addCardModal.close(); // Allows to close
-      addCardModal.renderSaving(false);
-    });
-    // console.log(input);
+    api
+      .addCard(input)
+      .then((arrayInputs) => {
+        // Adds card to server!!
+        const newCardData = arrayInputs; // new inputs
+        renderCard(newCardData); // Uses inputs in process of making new card
+        addCardModal.close(); // Allows to close
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        addCardModal.renderSaving(false); // Reset process
+      });
   },
 });
 
