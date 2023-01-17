@@ -1,6 +1,7 @@
 import Popup from "./Popup.js";
 
-// Hidden Delete Modal window
+// Uesed in Hidden Delete Modal window
+// Can be used for any confirmation
 export default class PopupWithConfirm extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
@@ -23,8 +24,8 @@ export default class PopupWithConfirm extends Popup {
   }
 
   // Updates yes-button text when saving
-  renderSavingText(isDeleteing) {
-    if (isDeleteing) {
+  renderSavingText(isConfirming) {
+    if (isConfirming) {
       this._deleteSubmitButton.textContent = "Deleting...";
     } else {
       this._deleteSubmitButton.textContent = this._deleteSubmitButtonText;
